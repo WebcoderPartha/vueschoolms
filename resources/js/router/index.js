@@ -7,9 +7,6 @@ const router = createRouter({
             path: '/',
             name: 'login',
             component:()=> import('../components/Auth/Login.vue'),
-            meta: {
-                title: 'Login Page'
-            }
         },
         {
             path: '/register',
@@ -20,6 +17,16 @@ const router = createRouter({
             path: '/dashboard',
             name: 'dashboard',
             component:()=> import('../components/Dashboard.vue')
+        },
+        {
+            path: '/classes',
+            name: 'classes',
+            component:()=> import('../components/Class/index.vue')
+        },
+        {
+            path: '/classes/edit/:id',
+            name: 'edit_class',
+            component:()=> import('../components/Class/EditClass.vue')
         },
 
 
