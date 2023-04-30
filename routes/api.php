@@ -11,5 +11,10 @@ use App\Http\Controllers\Api\Auth\AuthController;
 */
 
 Route::prefix('auth')->controller(AuthController::class)->group(function(){
+
     Route::post('/register', 'Register');
+    Route::post('/login', 'Login');
+    Route::get('/me', 'Me');
+    Route::get('/logout', 'Logout');
+
 });

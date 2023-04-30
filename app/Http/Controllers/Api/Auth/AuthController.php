@@ -11,14 +11,22 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function __construct(){
-        $this->middleware('admin')->except([
-            'Register',
-            'Login'
-        ]);
+
+    public function __construct()
+    {
+//        $this->middleware('auth:admin')->except(['Register', 'Login']);
+        $this->middleware('jwtAuth')->except(['Register', 'Login']);
     }
 
+
     public function Register(Request $request){
+
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:admins,email',
+            'password' => 'required|confirmed|min:6',
+            'password_confirmation' => 'required'
+        ]);
 
         $admin = Admin::create([
             'name' => $request->name,
@@ -26,37 +34,45 @@ class AuthController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        $token = Auth::guard('admin')->attempt([
-            'email' => $request->email,
-            'password' => $request->password
-        ]);
 
+
+        $token = Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password]);
         if ($token){
             return $this->respondWithToken($token);
         }
+
+
 
     }
 
     public function Login(Request $request){
 
-        $token = Auth::guard('admin')->attempt([
-            'email' => $request->email,
-            'password' => $request->password
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
 
-        if ($token){
+        if ($token = Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])){
+
             return $this->respondWithToken($token);
+
         }else{
             return Response::json('Invalid Email or Password!');
         }
 
+
     }
 
     public function Logout(){
+
         Auth::guard('admin')->logout();
         return Response::json('Logout successfully!');
+
     }
 
+    public function getAuthUser(){
+        return Response::json(Auth::guard('admin')->user());
+    }
 
 
     protected function respondWithToken($token)
@@ -64,7 +80,12 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => Auth::guard('admin')->factory()->getTTL() * 60
+            'expires_in' => Auth::guard('admin')->factory()->getTTL() * 43200,
+            'userId' => Auth::guard('admin')->user()->id,
+            'name' => Auth::guard('admin')->user()->name,
+            'email' => Auth::guard('admin')->user()->email,
         ]);
     }
+
+
 }
