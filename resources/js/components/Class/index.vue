@@ -31,6 +31,9 @@
                   <tr>
                     <th style="width: 10px">#</th>
                     <th>Name</th>
+                    <th>Multi Select <br>
+                      <button class="btn btn-sm btn-danger" @click="deleteAll" v-show="checkBox.length > 0"><i class="fa fa-trash-alt"></i></button>
+                    </th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -38,6 +41,12 @@
                   <tr v-for="(cls, index) in classes" :key="cls.id">
                     <td>{{ index + 1 }}</td>
                     <td>{{ cls.name }}</td>
+                    <td>
+
+                          <input type="checkbox" :value="cls.id" v-model="checkBox">
+
+
+                    </td>
                     <td>
                       <RouterLink :to="{name:'edit_class', params:{id:cls.id}}" class="badge bg-danger"><i class="fa fa-edit"></i></RouterLink>
                       <button  class="badge bg-danger"><i class="fa fa-edit"></i></button>
@@ -120,6 +129,8 @@
 </template>
 
 <script>
+
+
 export default {
   name: "index",
   created() {
@@ -133,15 +144,25 @@ export default {
         name: [],
         class_name: '',
       },
-
+      checkBox: [],
       classes: [],
       // category: '',
       // categories: [{name:'ok'}, {name:'okey'}]
     }
   },
   methods:{
+    deleteAll(){
+      let data = {
+        checkBox: this.checkBox
+      }
+      axios.post('/class/alldel', data).then(res => {
+        this.getClass();
+        this.checkBox = []
+        this.$router.push({name:'classes'})
+        Notification.success(res.data);
+      })
+    },
     addItem(){
-
 
         this.form.name.push(this.form.class_name)
         if (this.form.name.indexOf(this.form.class_name) !== this.form.name.lastIndexOf(this.form.class_name)){
@@ -150,7 +171,6 @@ export default {
         }
         this.form.name = [...new Set(this.form.name)]
         this.form.class_name = ''
-
 
     },
     pageTitle(){

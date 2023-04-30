@@ -85,4 +85,19 @@ class ClassController extends Controller
         return Response::json('Class deleted successfully!', 200);
 
     }
+
+    public function allDelete(Request $request){
+
+//        for ($i = 0; $i < count($request->checkBox); $i++){
+//
+//            $std =StudentClass::find($request->checkBox[$i]);
+//            $std->delete();
+//        }
+        foreach ($request->checkBox as $value){
+
+            StudentClass::find($value)->delete();
+        }
+
+        return Response::json('Class deleted successfully!', 200);
+    }
 }

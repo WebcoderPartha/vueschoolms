@@ -23,4 +23,5 @@ Route::prefix('auth')->controller(AuthController::class)->group(function(){
 
 Route::middleware('jwtAuth')->group(function (){
     Route::apiResource('class', ClassController::class);
+    Route::post('/class/alldel', [ClassController::class, 'allDelete']);
 });
