@@ -24,7 +24,7 @@ class AuthController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:admins,email',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|confirmed',
             'password_confirmation' => 'required'
         ]);
 
@@ -81,7 +81,7 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => Auth::guard('admin')->factory()->getTTL() * 43200,
-            'userId' => Auth::guard('admin')->user()->id,
+            'user_id' => Auth::guard('admin')->user()->id,
             'name' => Auth::guard('admin')->user()->name,
             'email' => Auth::guard('admin')->user()->email,
         ]);

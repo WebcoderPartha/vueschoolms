@@ -10,7 +10,7 @@
     <MenuBar></MenuBar>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" id="content_wrapper" style="margin-left: 0px;padding-bottom: 0px;margin-top: 0px;">
       <router-view></router-view>
     </div>
     <!-- /.content-wrapper -->
