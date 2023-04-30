@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Setup\ClassController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +19,8 @@ Route::prefix('auth')->controller(AuthController::class)->group(function(){
     Route::get('/me', 'Me');
     Route::get('/logout', 'Logout');
 
+});
+
+Route::middleware('jwtAuth')->group(function (){
+    Route::apiResource('class', ClassController::class);
 });
