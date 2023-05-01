@@ -65,7 +65,7 @@ class ClassController extends Controller
         $class = StudentClass::find($id);
 
         $this->validate($request, [
-            'name' => 'required|unique:student_classes,name,'.$class->id
+            'name' => 'unique:student_classes,name,'.$class->id
         ]);
 
         StudentClass::find($id)->update([

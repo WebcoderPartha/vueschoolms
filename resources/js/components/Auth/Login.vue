@@ -98,7 +98,7 @@ export default {
       }
     }
 
-  }
+  } // End Method
 }
 </script>
 

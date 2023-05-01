@@ -84,7 +84,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Class name</span>
                         </div>
-                        <input type="text"  v-model="form.class_name" class="form-control" placeholder="Username">
+                        <input type="text"  v-model="form.class_name" class="form-control" placeholder="Name">
                       </div>
                     </div>
                     <div class="col-md-2">
@@ -200,7 +200,7 @@ export default {
 
     },
     pageTitle(){
-      document.title = 'Dashboard'
+      document.title = 'Classes'
     },
     authenticate(){
       if (!User.authenticate()){
