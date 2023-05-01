@@ -48,7 +48,7 @@
 
 
           <li class="nav-item" :class="this.$route.path === '/classes' ? 'menu-open' : ''">
-            <a href="#" class="nav-link" :class="this.$route.path === '/classes' ? 'active' : ''">
+            <a href="#" class="nav-link" :class="(this.$route.path === '/classes' || this.$route.path === '/year') ? 'active' : ''">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Setup
@@ -57,13 +57,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <RouterLink :to="{name:'classes'}" class="nav-link">
+                <RouterLink :to="{name:'classes'}"  :class="this.$route.path === '/classes' ? 'active' : ''" class="nav-link">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>Classes</p>
                 </RouterLink>
               </li>
               <li class="nav-item">
-                <RouterLink :to="{name:'classes'}" class="nav-link">
+                <RouterLink :to="{name:'year'}"  :class="this.$route.path === '/year' ? 'active' : ''" class="nav-link">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>Year</p>
                 </RouterLink>

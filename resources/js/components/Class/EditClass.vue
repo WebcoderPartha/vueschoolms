@@ -35,6 +35,7 @@
                         </div>
                         <input type="text"  v-model="form.name" class="form-control" placeholder="name">
                       </div>
+
                       <small class="text-red" v-if="errors.name">{{ errors.name[0]}}</small>
                     </div>
                     <div class="col-md-2">
@@ -62,8 +63,6 @@
 
 <script>
 
-
-import axios from "axios";
 
 export default {
   name: "index",

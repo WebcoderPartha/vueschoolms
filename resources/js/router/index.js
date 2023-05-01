@@ -28,6 +28,21 @@ const router = createRouter({
             name: 'edit_class',
             component:()=> import('../components/Class/EditClass.vue')
         },
+        {
+            path: '/year',
+            name: 'year',
+            component:()=> import('../components/Year/index.vue')
+        },
+        {
+            path: '/year/edit/:id',
+            name: 'edit_year',
+            component:()=> import('../components/Year/EditYear.vue')
+        },
+        {
+            path: '/year/add',
+            name: 'add_year',
+            component:()=> import('../components/Year/AddYear.vue')
+        },
 
 
     ]

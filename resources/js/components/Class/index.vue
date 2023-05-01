@@ -26,7 +26,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered" v-show="classes.length > 0">
                   <thead>
                   <tr>
                     <th style="width: 10px">#</th>
@@ -55,6 +55,7 @@
 
                   </tbody>
                 </table>
+                <h3 class="text-center" v-show="!classes.length > 0">No data found!</h3>
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
@@ -106,7 +107,7 @@
                       <td>{{ index+1 }}</td>
                       <td>{{ value }}</td>
                       <td>
-                        <button @click="removeItem(index)" class="btn btn-sm btn-danger">-</button>
+                        <button @click.prevent="removeItem(index)" class="btn btn-sm btn-danger">-</button>
                       </td>
                     </tr>
 
@@ -190,13 +191,19 @@ export default {
     },
     addItem(){
 
-        this.form.name.push(this.form.class_name)
-        if (this.form.name.indexOf(this.form.class_name) !== this.form.name.lastIndexOf(this.form.class_name)){
+        if (this.form.class_name.length !== 0){
 
-          Notification.error('Duplicate category not allowed!')
+          this.form.name.push(this.form.class_name)
+          if (this.form.name.indexOf(this.form.class_name) !== this.form.name.lastIndexOf(this.form.class_name)){
+
+            Notification.error('Duplicate category not allowed!')
+          }
+          this.form.name = [...new Set(this.form.name)]
+          this.form.class_name = ''
+
+        }else{
+          Notification.error('Field must not be empty!')
         }
-        this.form.name = [...new Set(this.form.name)]
-        this.form.class_name = ''
 
     },
     pageTitle(){
