@@ -48,8 +48,8 @@
 
                     </td>
                     <td>
-                      <RouterLink :to="{name:'edit_class', params:{id:cls.id}}" class="badge bg-danger"><i class="fa fa-edit"></i></RouterLink>
-                      <button  class="badge bg-danger"><i class="fa fa-edit"></i></button>
+                      <RouterLink :to="{name:'edit_class', params:{id:cls.id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>
+                      &nbsp;<button @click="deleteData(cls.id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
                     </td>
                   </tr>
 
@@ -92,28 +92,28 @@
 
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-sm btn-primary">Store</button>
+
+                  <table class="table" v-show="form.name.length > 0">
+                    <thead>
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Name</th>
+                      <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(value, index) in form.name" :key="index+1">
+                      <td>{{ index+1 }}</td>
+                      <td>{{ value }}</td>
+                      <td>
+                        <button @click="removeItem(index)" class="btn btn-sm btn-danger">-</button>
+                      </td>
+                    </tr>
+
+                    </tbody>
+                  </table>
+                  <button type="submit" class="btn btn-primary">Store Data</button>
                 </form>
-
-                <table class="table" v-show="form.name.length > 0">
-                  <thead>
-                  <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Name</th>
-                    <th>Delete</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr v-for="(value, index) in form.name" :key="index+1">
-                    <td>{{ index+1 }}</td>
-                    <td>{{ value }}</td>
-                    <td>
-                      <button @click="removeItem(index)" class="btn btn-sm btn-danger">-</button>
-                    </td>
-                  </tr>
-
-                  </tbody>
-                </table>
               </div>
               <!-- /.card-body -->
             </div>
@@ -130,6 +130,8 @@
 
 <script>
 
+
+import axios from "axios";
 
 export default {
   name: "index",
@@ -160,6 +162,30 @@ export default {
         this.checkBox = []
         this.$router.push({name:'classes'})
         Notification.success(res.data);
+      })
+    },
+    deleteData(id){
+      Swal.fire({
+        title: 'Are you sure?',
+        // text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.delete('/class/'+id).then(res => {
+            return this.classes = this.classes.filter(cls => {
+              return cls.id !== id
+            })
+          })
+          Swal.fire(
+              'Deleted!',
+              // 'Your file has been deleted.'+ id,
+              'success'
+          )
+        }
       })
     },
     addItem(){

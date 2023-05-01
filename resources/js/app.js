@@ -23,7 +23,7 @@ const Toast = Swal.mixin({
         title: 'sweet_titleImportant',
     }
 })
-
+window.Swal = Swal;
 axios.defaults.baseURL = 'http://localhost:8000/api';
 // Authorization Bearer Token
 axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
