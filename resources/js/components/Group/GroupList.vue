@@ -31,8 +31,8 @@
                   <tr>
                     <th style="width: 10px">#</th>
                     <th>Name</th>
-                    <th><input type="checkbox" > Select All
-                      <button class="btn btn-sm btn-danger" v-show="selected.length > 0"><i class="fa fa-trash-alt"></i></button>
+                    <th><input type="checkbox" v-model="selectAll"> Select All
+                      <button class="btn btn-sm btn-danger" @click="deleteAll" v-show="selected.length > 0"><i class="fa fa-trash-alt"></i></button>
                     </th>
                     <th>Action</th>
                   </tr>
@@ -99,7 +99,24 @@ export default {
     }
   },
   computed: {
+    selectAll: {
+      get: function(){
+        return this.groups ? this.groups.length === this.selected.length : false;
+      },
+      set: function(value){
+        let selected = [];
 
+        if (value){
+
+          this.groups.forEach(group => {
+            selected.push(group.id)
+          })
+
+        }
+        this.selected = selected;
+
+      }
+    }
   },
   methods:{
     deleteAll(){

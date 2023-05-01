@@ -35,7 +35,7 @@ Route::middleware('jwtAuth')->group(function (){
 
     // Group APIs
     Route::apiResource('group', GroupController::class);
-    Route::post('/group/alldel', [YearController::class, 'allDelete']);
+    Route::post('/group/alldel', [GroupController::class, 'allDelete']);
 
 
 });
