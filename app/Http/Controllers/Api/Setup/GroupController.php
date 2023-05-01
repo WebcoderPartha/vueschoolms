@@ -3,24 +3,18 @@
 namespace App\Http\Controllers\Api\Setup;
 
 use App\Http\Controllers\Controller;
+use App\Models\Group;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class GroupController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
-    }
+        $data = Group::orderBy('id', 'DESC')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return Response::json($data);
     }
 
     /**
@@ -28,7 +22,26 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        $this->validate($request, [
+//            'name' => 'required|unique:student_classes,name'
+//        ]);
+
+        if (count($request->name) > 0){
+
+            foreach ($request->name as $value){
+                Group::create([
+                    'name' => $value
+                ]);
+            }
+
+        }else{
+            Group::create([
+                'name' => $request->add_group
+            ]);
+        }
+
+        return Response::json('Group added successfully!', 200);
+
     }
 
     /**
@@ -36,23 +49,29 @@ class GroupController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Group::find($id);
+        return Response::json($data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = Group::find($id);
+
+        $this->validate($request, [
+            'name' => 'unique:groups,name,'.$data->id
+        ]);
+
+        Group::find($id)->update([
+            'name' => $request->name
+        ]);
+
+        return Response::json('Group updated successfully!', 200);
+
     }
 
     /**
@@ -60,6 +79,25 @@ class GroupController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Group::find($id)->delete();
+        return Response::json('Group deleted successfully!', 200);
+
     }
+
+    public function allDelete(Request $request){
+
+//        for ($i = 0; $i < count($request->checkBox); $i++){
+//
+//            $std =StudentClass::find($request->checkBox[$i]);
+//            $std->delete();
+//        }
+        foreach ($request->selected as $value){
+
+            Group::find($value)->delete();
+        }
+
+        return Response::json('Group deleted successfully!', 200);
+    }
+
+
 }

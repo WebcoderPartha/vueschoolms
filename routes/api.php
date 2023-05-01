@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Setup\ClassController;
 use App\Http\Controllers\Api\Setup\YearController;
+use App\Http\Controllers\Api\Setup\GroupController;
 
 
 /*
@@ -31,6 +32,10 @@ Route::middleware('jwtAuth')->group(function (){
     // Class APIs
     Route::apiResource('year', YearController::class);
     Route::post('/year/alldel', [YearController::class, 'allDelete']);
+
+    // Group APIs
+    Route::apiResource('group', GroupController::class);
+    Route::post('/group/alldel', [YearController::class, 'allDelete']);
 
 
 });

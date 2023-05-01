@@ -43,6 +43,21 @@ const router = createRouter({
             name: 'add_year',
             component:()=> import('../components/Year/AddYear.vue')
         },
+        {
+            path: '/group',
+            name: 'group',
+            component:()=> import('../components/Group/GroupList.vue')
+        },
+        {
+            path: '/group/edit/:id',
+            name: 'edit_group',
+            component:()=> import('../components/Group/EditGroup.vue')
+        },
+        {
+            path: '/group/add',
+            name: 'add_group',
+            component:()=> import('../components/Group/AddGroup.vue')
+        },
 
 
     ]

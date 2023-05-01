@@ -69,7 +69,7 @@
                 </RouterLink>
               </li>
               <li class="nav-item">
-                <RouterLink :to="{name:'classes'}" class="nav-link">
+                <RouterLink :to="{name:'group'}" :class="this.$route.path === '/group' ? 'active' : ''" class="nav-link">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>Group</p>
                 </RouterLink>
