@@ -35,7 +35,6 @@
                         </div>
                         <input type="text"  v-model="add_year" class="form-control" placeholder="name">
                       </div>
-                      {{this.form.name}}
                       <small class="text-red" v-if="errors.name">{{ errors.name[0]}}</small>
                     </div>
                     <div class="col-md-2">

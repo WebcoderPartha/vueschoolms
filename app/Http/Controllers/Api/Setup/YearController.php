@@ -90,7 +90,7 @@ class YearController extends Controller
 //            $std =StudentClass::find($request->checkBox[$i]);
 //            $std->delete();
 //        }
-        foreach ($request->checkBox as $value){
+        foreach ($request->selected as $value){
 
             Year::find($value)->delete();
         }

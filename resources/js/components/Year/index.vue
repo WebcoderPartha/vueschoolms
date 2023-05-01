@@ -31,8 +31,8 @@
                   <tr>
                     <th style="width: 10px">#</th>
                     <th>Name</th>
-                    <th>Multi Select <br>
-                      <button class="btn btn-sm btn-danger" @click="deleteAll" v-show="checkBox.length > 0"><i class="fa fa-trash-alt"></i></button>
+                    <th><input type="checkbox" v-model="allSelect"> Select All
+                      <button class="btn btn-sm btn-danger" @click="deleteAll" v-show="selected.length > 0"><i class="fa fa-trash-alt"></i></button>
                     </th>
                     <th>Action</th>
                   </tr>
@@ -43,7 +43,7 @@
                     <td>{{ year.name }}</td>
                     <td>
 
-                      <input type="checkbox" :value="year.id" v-model="checkBox">
+                      <input type="checkbox" :value="year.id" v-model="selected">
 
 
                     </td>
@@ -94,19 +94,38 @@ export default {
   },
   data(){
     return {
-
-      checkBox: [],
       years: [],
+      selected: []
+    }
+  },
+  computed: {
+    allSelect:{
+
+      get: function () {
+        return this.years.length ? this.selected.length === this.years.length : false;
+      },
+      set: function (value){
+        let selected = [];
+        if (value){
+          this.years.forEach(year => {
+            selected.push(year.id)
+          })
+        }
+
+        this.selected = selected;
+
+      }
+
     }
   },
   methods:{
     deleteAll(){
       let data = {
-        checkBox: this.checkBox
+        selected: this.selected
       }
       axios.post('/year/alldel', data).then(res => {
         this.getYear();
-        this.checkBox = []
+        this.selected = []
         Notification.success(res.data);
       })
     },
