@@ -48,5 +48,9 @@ Route::middleware('jwtAuth')->group(function (){
     Route::apiResource('examtype', ExamTypeController::class);
     Route::post('/examtype/alldel', [ExamTypeController::class, 'allDelete']);
 
+    // Subject Type APIs
+    Route::apiResource('examtype', ExamTypeController::class);
+    Route::post('/examtype/alldel', [ExamTypeController::class, 'allDelete']);
+
 
 });

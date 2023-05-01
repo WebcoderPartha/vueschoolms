@@ -3,24 +3,18 @@
 namespace App\Http\Controllers\Api\Setup;
 
 use App\Http\Controllers\Controller;
+use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class SubjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
-    }
+        $data = Subject::orderBy('id', 'DESC')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return Response::json($data);
     }
 
     /**
@@ -28,7 +22,22 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        $this->validate($request, [
+//            'name' => 'required|unique:student_classes,name'
+//        ]);
+
+        if (count($request->name) > 0){
+
+            foreach ($request->name as $value){
+                Subject::create([
+                    'name' => $value
+                ]);
+            }
+
+        }
+
+        return Response::json('Subject added successfully!', 200);
+
     }
 
     /**
@@ -36,23 +45,29 @@ class SubjectController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Subject::find($id);
+        return Response::json($data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = Subject::find($id);
+
+        $this->validate($request, [
+            'name' => 'unique:subjects,name,'.$data->id
+        ]);
+
+        Subject::find($id)->update([
+            'name' => $request->name
+        ]);
+
+        return Response::json('Subject updated successfully!', 200);
+
     }
 
     /**
@@ -60,6 +75,24 @@ class SubjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Subject::find($id)->delete();
+        return Response::json('Subject deleted successfully!', 200);
+
     }
+
+    public function allDelete(Request $request){
+
+//        for ($i = 0; $i < count($request->checkBox); $i++){
+//
+//            $std =StudentClass::find($request->checkBox[$i]);
+//            $std->delete();
+//        }
+        foreach ($request->selected as $value){
+
+            Subject::find($value)->delete();
+        }
+
+        return Response::json('Subject deleted successfully!', 200);
+    }
+
 }
