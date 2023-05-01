@@ -88,6 +88,21 @@ const router = createRouter({
             name: 'add_examtype',
             component:()=> import('../components/ExamType/ExamTypeAdd.vue')
         },
+        {
+            path: '/subject',
+            name: 'subject',
+            component:()=> import('../components/Subject/SubjectList.vue')
+        },
+        {
+            path: '/subject/edit/:id',
+            name: 'edit_subject',
+            component:()=> import('../components/Subject/SubjectEdit.vue')
+        },
+        {
+            path: '/subject/add',
+            name: 'add_subject',
+            component:()=> import('../components/Subject/SubjectAdd.vue')
+        },
 
 
     ]

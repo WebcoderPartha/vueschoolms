@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Setup\YearController;
 use App\Http\Controllers\Api\Setup\GroupController;
 use App\Http\Controllers\Api\Setup\ShiftController;
 use App\Http\Controllers\Api\Setup\ExamTypeController;
+use App\Http\Controllers\Api\Setup\SubjectController;
 
 
 
@@ -49,8 +50,8 @@ Route::middleware('jwtAuth')->group(function (){
     Route::post('/examtype/alldel', [ExamTypeController::class, 'allDelete']);
 
     // Subject Type APIs
-    Route::apiResource('examtype', ExamTypeController::class);
-    Route::post('/examtype/alldel', [ExamTypeController::class, 'allDelete']);
+    Route::apiResource('subject', SubjectController::class);
+    Route::post('/subject/alldel', [SubjectController::class, 'allDelete']);
 
 
 });
