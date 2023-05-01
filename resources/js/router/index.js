@@ -73,6 +73,21 @@ const router = createRouter({
             name: 'add_shift',
             component:()=> import('../components/Shift/ShiftAdd.vue')
         },
+        {
+            path: '/exam/type',
+            name: 'examtype',
+            component:()=> import('../components/ExamType/ExamTypeList.vue')
+        },
+        {
+            path: '/exam/type/edit/:id',
+            name: 'edit_examtype',
+            component:()=> import('../components/ExamType/ExamTypeEdit.vue')
+        },
+        {
+            path: '/exam/type/add',
+            name: 'add_examtype',
+            component:()=> import('../components/ExamType/ExamTypeAdd.vue')
+        },
 
 
     ]

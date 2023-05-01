@@ -81,7 +81,7 @@
                 </RouterLink>
               </li>
               <li class="nav-item">
-                <RouterLink :to="{name:'classes'}" class="nav-link">
+                <RouterLink :to="{name:'examtype'}" class="nav-link" :class="this.$route.path === '/exam/type' ? 'active' : ''">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>Exam Type</p>
                 </RouterLink>
