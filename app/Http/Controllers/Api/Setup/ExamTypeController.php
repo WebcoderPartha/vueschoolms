@@ -34,10 +34,6 @@ class ExamTypeController extends Controller
                 ]);
             }
 
-        }else{
-            ExamType::create([
-                'name' => $request->add_examtype
-            ]);
         }
 
         return Response::json('Examtype added successfully!', 200);
