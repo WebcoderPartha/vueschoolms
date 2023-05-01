@@ -102,7 +102,7 @@ export default {
     allSelect:{
 
       get: function () {
-        return this.years.length ? this.selected.length === this.years.length : false;
+        return this.years ? this.selected.length === this.years.length : false;
       },
       set: function (value){
         let selected = [];

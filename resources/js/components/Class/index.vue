@@ -31,7 +31,7 @@
                   <tr>
                     <th style="width: 10px">#</th>
                     <th>Name</th>
-                    <th>Multi Select <br>
+                    <th><input type="checkbox" v-model="allSelect">All Select
                       <button class="btn btn-sm btn-danger" @click="deleteAll" v-show="checkBox.length > 0"><i class="fa fa-trash-alt"></i></button>
                     </th>
                     <th>Action</th>
@@ -141,6 +141,7 @@ export default {
     this.pageTitle();
     this.getClass();
   },
+
   data(){
     return {
       form: {
@@ -149,11 +150,29 @@ export default {
       },
       checkBox: [],
       classes: [],
-      // category: '',
-      // categories: [{name:'ok'}, {name:'okey'}]
+    }
+  },
+  computed: {
+    allSelect: {
+      get: function (){
+        return this.classes ? this.classes.length === this.checkBox.length : false;
+      },
+      set: function (value){
+
+        let selected = [];
+        if (value){
+          this.classes.forEach(cls => {
+            selected.push(cls.id)
+          })
+        }
+
+        this.checkBox = selected
+
+      }
     }
   },
   methods:{
+
     deleteAll(){
       let data = {
         checkBox: this.checkBox
