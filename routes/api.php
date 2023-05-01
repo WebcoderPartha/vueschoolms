@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Setup\ClassController;
 use App\Http\Controllers\Api\Setup\YearController;
 use App\Http\Controllers\Api\Setup\GroupController;
+use App\Http\Controllers\Api\Setup\ShiftController;
+
 
 
 /*
@@ -36,6 +38,10 @@ Route::middleware('jwtAuth')->group(function (){
     // Group APIs
     Route::apiResource('group', GroupController::class);
     Route::post('/group/alldel', [GroupController::class, 'allDelete']);
+
+    // Shift APIs
+    Route::apiResource('shift', ShiftController::class);
+    Route::post('/shift/alldel', [ShiftController::class, 'allDelete']);
 
 
 });

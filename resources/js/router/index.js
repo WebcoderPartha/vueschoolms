@@ -58,6 +58,21 @@ const router = createRouter({
             name: 'add_group',
             component:()=> import('../components/Group/AddGroup.vue')
         },
+        {
+            path: '/shift',
+            name: 'shift',
+            component:()=> import('../components/Shift/ShiftList.vue')
+        },
+        {
+            path: '/shift/edit/:id',
+            name: 'edit_shift',
+            component:()=> import('../components/Shift/ShiftEdit.vue')
+        },
+        {
+            path: '/shift/add',
+            name: 'add_shift',
+            component:()=> import('../components/Shift/ShiftAdd.vue')
+        },
 
 
     ]

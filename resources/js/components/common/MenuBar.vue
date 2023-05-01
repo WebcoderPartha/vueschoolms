@@ -75,7 +75,7 @@
                 </RouterLink>
               </li>
               <li class="nav-item">
-                <RouterLink :to="{name:'classes'}" class="nav-link">
+                <RouterLink :to="{name:'shift'}" :class="this.$route.path === '/shift' ? 'active' : ''" class="nav-link">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>Shift</p>
                 </RouterLink>
