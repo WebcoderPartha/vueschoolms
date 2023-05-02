@@ -119,6 +119,11 @@ const router = createRouter({
             name: 'add_assignsubject',
             component:()=> import('../components/AssignSubject/AssignSubjectAdd.vue')
         },
+        {
+            path: '/assign/subject/class/:id',
+            name: 'subject_deatils',
+            component:()=> import('../components/AssignSubject/View.vue')
+        },
 
 
     ]

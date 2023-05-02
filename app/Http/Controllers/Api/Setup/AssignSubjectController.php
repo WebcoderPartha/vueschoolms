@@ -50,16 +50,11 @@ class AssignSubjectController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = AssignSubject::with('student_class', 'subject')->where('class_id', $id)->get();
+        return Response::json($data, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.

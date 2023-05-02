@@ -48,7 +48,8 @@
 
                     </td>
                     <td>
-                      <RouterLink :to="{name: 'edit_asssub', params:{id:assignsubject.class_id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>
+                      <RouterLink :to="{name: 'edit_asssub', params:{id:assignsubject.class_id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>&nbsp;
+                      <RouterLink :to="{name: 'subject_deatils', params:{id:assignsubject.class_id}}" class="badge bg-primary"><i class="fa fa-eye"></i></RouterLink>
                       &nbsp;<button @click="deleteData(assignsubject.id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
                     </td>
                   </tr>
@@ -186,7 +187,7 @@ export default {
 
     getAssignSubjectClass(){
       axios.get('/assignsubject').then(res => {
-        console.log(res.data)
+
         this.assignsubjects = res.data
       })
     }
