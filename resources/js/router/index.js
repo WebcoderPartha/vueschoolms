@@ -104,6 +104,7 @@ const router = createRouter({
             component:()=> import('../components/Subject/SubjectAdd.vue')
         },
 
+        // Assign Subject
         {
             path: '/assign/subject',
             name: 'assignsubject',
@@ -123,6 +124,72 @@ const router = createRouter({
             path: '/assign/subject/class/:id',
             name: 'subject_deatils',
             component:()=> import('../components/AssignSubject/View.vue')
+        },
+
+        // Registration Fee
+        {
+            path: '/registration/fees',
+            name: 'regifee',
+            component:()=> import('../components/RegistrationFee/RegisterFeeList.vue')
+        },
+        {
+            path:  '/registration/fees/edit/:id',
+            name: 'edit_regifee',
+            component:()=> import('../components/RegistrationFee/RegisterFeeEdit.vue')
+        },
+        {
+            path:  '/registration/fees/add',
+            name: 'add_regifee',
+            component:()=> import('../components/RegistrationFee/RegisterFeeAdd.vue')
+        },
+        {
+            path:  '/registration/fees/detail/:id',
+            name: 'regifee_detail',
+            component:()=> import('../components/RegistrationFee/RegisterFeeDetail.vue')
+        },
+
+        // Monthly Fee
+        {
+            path: '/monthly/fees',
+            name: 'monthlyfee',
+            component:()=> import('../components/MonthlyFee/FeeList.vue')
+        },
+        {
+            path:  '/monthly/fees/edit/:id',
+            name: 'edit_monthlyfee',
+            component:()=> import('../components/MonthlyFee/FeeEdit.vue')
+        },
+        {
+            path:  '/monthly/fees/add',
+            name: 'add_monthlyfee',
+            component:()=> import('../components/MonthlyFee/FeeAdd.vue')
+        },
+        {
+            path:  '/monthly/fees/detail/:id',
+            name: 'monthlyfee_detail',
+            component:()=> import('../components/MonthlyFee/FeeDetail.vue')
+        },
+
+        // Exam Fee
+        {
+            path: '/exam/fees',
+            name: 'examfee',
+            component:()=> import('../components/ExamFee/FeeList.vue')
+        },
+        {
+            path:  '/exam/fees/edit/:id',
+            name: 'edit_examfee',
+            component:()=> import('../components/ExamFee/FeeEdit.vue')
+        },
+        {
+            path:  '/exam/fees/add',
+            name: 'add_examfee',
+            component:()=> import('../components/ExamFee/FeeAdd.vue')
+        },
+        {
+            path:  '/exam/fees/detail/:id',
+            name: 'examfee_datail',
+            component:()=> import('../components/ExamFee/FeeDetail.vue')
         },
 
 

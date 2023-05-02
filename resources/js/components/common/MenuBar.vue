@@ -47,7 +47,7 @@
           </li>
 
 
-          <li class="nav-item" :class="this.$route.path === '/classes' ? 'menu-open' : ''">
+          <li class="nav-item" :class="(this.$route.path === '/classes' || this.$route.path === '/year' || this.$route.path === '/exam/group') ? 'menu-open' : ''">
             <a href="#" class="nav-link" :class="(this.$route.path === '/classes' || this.$route.path === '/year') ? 'active' : ''">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
@@ -102,8 +102,8 @@
           </li>
 
 
-          <li class="nav-item" :class="this.$route.path === '/classes' ? 'menu-open' : ''">
-            <a href="#" class="nav-link" :class="(this.$route.path === '/classes' || this.$route.path === '/year') ? 'active' : ''">
+          <li class="nav-item" :class="(this.$route.path === '/registration/fees' || this.$route.path === '/monthly/fees') ? 'menu-open' : ''">
+            <a href="#" class="nav-link" :class="(this.$route.path === '/registration/fees' || this.$route.path === '/monthly/fees') ? 'active' : ''">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Manage Fee
@@ -112,19 +112,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <RouterLink :to="{name:'classes'}"  :class="this.$route.path === '/classes' ? 'active' : ''" class="nav-link">
+                <RouterLink :to="{name:'regifee'}"  :class="this.$route.path === '/registration/fees' ? 'active' : ''" class="nav-link">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>Registration Fee</p>
                 </RouterLink>
               </li>
               <li class="nav-item">
-                <RouterLink :to="{name:'year'}"  :class="this.$route.path === '/year' ? 'active' : ''" class="nav-link">
+                <RouterLink :to="{name:'monthlyfee'}"  :class="this.$route.path === '/monthly/fees' ? 'active' : ''" class="nav-link">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>Monthly Fee</p>
                 </RouterLink>
               </li>
               <li class="nav-item">
-                <RouterLink :to="{name:'group'}" :class="this.$route.path === '/group' ? 'active' : ''" class="nav-link">
+                <RouterLink :to="{name:'examfee'}" :class="this.$route.path === '/exam/fees' ? 'active' : ''" class="nav-link">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>Exam Fee</p>
                 </RouterLink>
