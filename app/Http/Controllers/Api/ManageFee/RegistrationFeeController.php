@@ -85,5 +85,11 @@ class RegistrationFeeController extends Controller
 
     public function allDelete(Request $request){
 
+        foreach ($request->checkBox as $year_id){
+            RegistrationFee::where('year_id', $year_id)->delete();
+        }
+
+        return Response::json('Data deleted successfully!');
+
     }
 }
