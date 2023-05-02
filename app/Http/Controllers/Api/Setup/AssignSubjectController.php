@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api\Setup;
 
 use App\Http\Controllers\Controller;
+use App\Models\AssignSubject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class AssignSubjectController extends Controller
 {
@@ -12,7 +14,10 @@ class AssignSubjectController extends Controller
      */
     public function index()
     {
-        //
+        $data = AssignSubject::with('student_class')->select('class_id')->groupBy('class_id')->orderBy('class_id', 'DESC')->get();
+
+        return Response::json($data);
+
     }
 
     /**
@@ -28,7 +33,16 @@ class AssignSubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        for($i = 0; $i < count($request->subject_id); $i++){
+            AssignSubject::create([
+                'class_id' => $request->class_id,
+                'subject_id' => $request->subject_id[$i]
+            ]);
+        }
+
+        return Response::json('Assign subject added successfully!', 200);
+
     }
 
     /**

@@ -31,7 +31,7 @@
                     <div class="col-md-10">
                       <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text">Year name</span>
+                          <span class="input-group-text">Year</span>
                         </div>
                         <input type="text"  v-model="add_year" class="form-control" placeholder="name">
                       </div>

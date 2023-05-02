@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Shift</h1>
+            <h1 class="m-0">Assign Subject</h1>
           </div><!-- /.col -->
 
 
@@ -22,11 +22,11 @@
           <div class="col-md-10 mx-auto">
             <div class="card">
               <div class="card-header">
-                <h3>Shift list <RouterLink :to="{name:'add_shift'}" class="btn btn-primary float-right">Add Shift</RouterLink></h3>
+                <h3>Subject list <RouterLink :to="{name:'add_assignsubject'}" class="btn btn-primary float-right">Add Assign Subject</RouterLink></h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-bordered" v-show="shifts.length > 0">
+                <table class="table table-bordered" v-show="assignsubjects.length > 0">
                   <thead>
                   <tr>
                     <th style="width: 10px">#</th>
@@ -38,24 +38,24 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr v-for="(shift, index) in shifts" :key="shift.id">
+                  <tr v-for="(assignsubject, index) in assignsubjects" :key="assignsubject.id">
                     <td>{{ index + 1 }}</td>
-                    <td>{{ shift.name }}</td>
+                    <td>{{ assignsubject.student_class.name }}</td>
                     <td>
 
-                      <input type="checkbox" :value="shift.id" v-model="selected">
+                      <input type="checkbox" :value="assignsubject.id" v-model="selected">
 
 
                     </td>
                     <td>
-                      <RouterLink :to="{name:'edit_shift', params:{id:shift.id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>
-                      &nbsp;<button @click="deleteData(shift.id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
+                      <RouterLink :to="{name: 'edit_asssub', params:{id:assignsubject.class_id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>
+                      &nbsp;<button @click="deleteData(assignsubject.id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
                     </td>
                   </tr>
 
                   </tbody>
                 </table>
-                <h3 class="text-center" v-show="!shifts.length > 0">No data found!</h3>
+                <h3 class="text-center" v-show="!assignsubjects.length > 0">No data found!</h3>
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
@@ -86,29 +86,30 @@
 
 
 export default {
-  name: "ShiftList",
+  name: "AssignSubjectList",
   created() {
     this.authenticate();
     this.pageTitle();
-    this.getShift();
+    this.getAssignSubjectClass();
   },
   data(){
     return {
-      shifts: [],
-      selected: []
+      subjects: [],
+      selected: [],
+      assignsubjects: []
     }
   },
   computed: {
     selectAll: {
       get: function(){
-        return this.shifts ? this.shifts.length === this.selected.length : false;
+        return this.subjects ? this.subjects.length === this.selected.length : false;
       },
       set: function(value){
         let selected = [];
 
         if (value){
 
-          this.shifts.forEach(group => {
+          this.subjects.forEach(group => {
             selected.push(group.id)
           })
 
@@ -120,6 +121,7 @@ export default {
   },
   methods:{
     deleteAll(){
+
       Swal.fire({
         title: 'Are you sure?',
         // text: "You won't be able to revert this!",
@@ -130,15 +132,14 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-
           let data = {
             selected: this.selected
           }
-          axios.post('/shift/alldel', data).then(res => {
-            this.getShift();
+          axios.post('/subject/alldel', data).then(res => {
+            this.getSubject();
             this.selected = []
+            Notification.success(res.data);
           })
-
           Swal.fire(
               'Deleted!',
               // 'Your file has been deleted.'+ id,
@@ -159,9 +160,9 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          axios.delete('/shift/'+id).then(res => {
-            return this.shifts = this.shifts.filter(group => {
-              return group.id !== id
+          axios.delete('/subject/'+id).then(res => {
+            return this.subjects = this.subjects.filter(subject => {
+              return subject.id !== id
             })
           })
           Swal.fire(
@@ -174,7 +175,7 @@ export default {
     },
 
     pageTitle(){
-      document.title = 'Shifts'
+      document.title = 'Assign Subject List'
     },
     authenticate(){
       if (!User.authenticate()){
@@ -182,12 +183,13 @@ export default {
         this.$router.push({name:'login'})
       }
     },
-    getShift(){
-      axios.get('/shift').then(res => {
-        this.shifts = res.data
-      })
-    },
 
+    getAssignSubjectClass(){
+      axios.get('/assignsubject').then(res => {
+        console.log(res.data)
+        this.assignsubjects = res.data
+      })
+    }
 
   } // End Method
 }
