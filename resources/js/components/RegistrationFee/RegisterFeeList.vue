@@ -26,7 +26,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-bordered" v-show="assignsubjects.length > 0">
+                <table class="table table-bordered" v-show="registrationFees.length > 0">
                   <thead>
                   <tr>
                     <th style="width: 10px">#</th>
@@ -38,25 +38,25 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr v-for="(assignsubject, index) in assignsubjects" :key="index">
+                  <tr v-for="(registrationFee, index) in registrationFees" :key="index">
                     <td>{{ index + 1 }}</td>
-                    <td>{{ assignsubject.student_class.name }}</td>
+                    <td>{{ registrationFee.year.name }}</td>
                     <td>
 
-                      <input type="checkbox" :value="assignsubject.class_id" v-model="checkBox">
+                      <input type="checkbox" :value="registrationFee.year_id" v-model="checkBox">
 
 
                     </td>
                     <td>
-                      <RouterLink :to="{name: 'edit_asssub', params:{id:assignsubject.class_id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>&nbsp;
-                      <RouterLink :to="{name: 'subject_deatils', params:{id:assignsubject.class_id}}" class="badge bg-primary"><i class="fa fa-eye"></i></RouterLink>
-                      &nbsp;<button @click="deleteData(assignsubject.class_id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
+                      <RouterLink :to="{name: 'edit_regifee', params:{id:registrationFee.year_id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>&nbsp;
+                      <RouterLink :to="{name: 'regifee_detail', params:{id:registrationFee.year_id}}" class="badge bg-primary"><i class="fa fa-eye"></i></RouterLink>
+                      &nbsp;<button @click="deleteData(registrationFee.year_id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
                     </td>
                   </tr>
 
                   </tbody>
                 </table>
-                <h3 class="text-center" v-show="!assignsubjects.length > 0">No data found!</h3>
+                <h3 class="text-center" v-show="!registrationFees.length > 0">No data found!</h3>
               </div>
               <!-- /.card-body -->
 
@@ -83,25 +83,25 @@ export default {
   created() {
     this.authenticate();
     this.pageTitle();
-    this.getAssignSubjectClass();
+    this.getRegistrationFee();
   },
   data(){
     return {
 
-      assignsubjects: [],
+      registrationFees: [],
       checkBox: []
     }
   },
   computed: {
     selectAll: {
       get:function (){
-        return this.assignsubjects ? this.assignsubjects.length === this.checkBox.length : false
+        return this.registrationFees ? this.registrationFees.length === this.checkBox.length : false
       },
       set: function (value){
 
         let arrayValue = [];
         if (value){
-          this.assignsubjects.forEach(assignsubject => {
+          this.regifeez.forEach(assignsubject => {
             arrayValue.push(assignsubject.class_id)
           });
         }
@@ -127,8 +127,8 @@ export default {
           let data = {
             checkBox: this.checkBox
           }
-          axios.post('/assignsubject/alldel', data).then(res => {
-            this.getAssignSubjectClass();
+          axios.post('/regifee/alldel', data).then(res => {
+            this.getRegistrationFee();
             this.checkBox = []
             Notification.success(res.data);
           })
@@ -152,9 +152,9 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          axios.delete('/assignsubject/'+id).then(res => {
-            return this.assignsubjects = this.assignsubjects.filter(subject => {
-              return subject.class_id !== id
+          axios.delete('/regifee/'+id).then(res => {
+            return this.registrationFees = this.registrationFees.filter(regiFee => {
+              return regiFee.year_id !== id
             })
           })
           Swal.fire(
@@ -176,10 +176,11 @@ export default {
       }
     },
 
-    getAssignSubjectClass(){
-      axios.get('/assignsubject').then(res => {
+    getRegistrationFee(){
+      axios.get('/regifee').then(res => {
 
-        this.assignsubjects = res.data
+        this.registrationFees = res.data;
+        console.log(this.registrationFees)
       })
     }
 

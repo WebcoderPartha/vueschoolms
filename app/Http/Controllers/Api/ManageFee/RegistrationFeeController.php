@@ -14,7 +14,7 @@ class RegistrationFeeController extends Controller
      */
     public function index()
     {
-        $data = RegistrationFee::with('year')->select('year')->groupBy('year')->orderBy('id', 'DESC')->get();
+        $data = RegistrationFee::with('year')->select('year_id')->groupBy('year_id')->orderBy('id', 'DESC')->get();
         return Response::json($data);
     }
 
