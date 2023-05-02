@@ -60,7 +60,7 @@
                     </div>
                   </div>
                   <router-link :to="{name:'assignsubject'}" class="btn btn-danger">Back</router-link>
-                  {{form.class_id}} {{form.subject_id}} {{class_name}} {{subject_names}}
+
 
                 </div>
 

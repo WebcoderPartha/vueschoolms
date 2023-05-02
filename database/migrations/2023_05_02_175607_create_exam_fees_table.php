@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('exam_fees', function (Blueprint $table) {
             $table->id();
+            $table->integer('year_id');
+            $table->integer('class_id');
+            $table->integer('exam_type_id');
+            $table->string('amount');
             $table->timestamps();
         });
     }
