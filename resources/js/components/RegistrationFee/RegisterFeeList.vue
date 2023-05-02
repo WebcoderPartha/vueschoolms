@@ -167,7 +167,7 @@ export default {
     },
 
     pageTitle(){
-      document.title = 'Assign Subject List'
+      document.title = 'Registration Fee List'
     },
     authenticate(){
       if (!User.authenticate()){

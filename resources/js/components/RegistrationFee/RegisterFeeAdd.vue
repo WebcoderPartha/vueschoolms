@@ -170,7 +170,7 @@ export default {
   methods:{
 
     pageTitle(){
-      document.title = 'Add Assign Subject'
+      document.title = 'Add Registration Fee'
     },
     authenticate(){
       if (!User.authenticate()){

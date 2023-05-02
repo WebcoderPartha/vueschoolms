@@ -57,7 +57,7 @@ class RegistrationFeeController extends Controller
     public function update(Request $request, string $id)
     {
 
-        RegistrationFee::where('year_id')->delete();
+        RegistrationFee::where('year_id', $id)->delete();
 
         $countClass = count($request->class_id);
 
@@ -69,7 +69,7 @@ class RegistrationFeeController extends Controller
             ]);
         }
 
-        return Response::json('Data inserted successfully!');
+        return Response::json('Data updated successfully!');
 
     }
 
