@@ -71,7 +71,7 @@ class AssignSubjectController extends Controller
             ]);
         }
 
-        return Response::json('Assign subject added successfully!', 200);
+        return Response::json('Assign updated added successfully!', 200);
 
 
     }
@@ -81,6 +81,19 @@ class AssignSubjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        AssignSubject::where('class_id', $id)->delete();
+        return Response::json('Assign subject deleted successfully!', 200);
     }
+
+    public function allDelete(Request $request){
+
+
+        for($i = 0; $i < count($request->checkBox); $i++){
+            AssignSubject::where('class_id', $request->checkBox[$i])->delete();
+        }
+
+        return Response::json('Assign subject deleted successfully!', 200);
+
+    }
+
 }
