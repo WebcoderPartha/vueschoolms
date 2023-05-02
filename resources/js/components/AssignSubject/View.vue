@@ -31,6 +31,9 @@
                   </tr>
                 </table>
               </div>
+              <div class="card-footer">
+                <router-link :to="{name:'assignsubject'}" class="btn btn-danger">Back</router-link>
+              </div>
             </div>
           </div>
         </div>

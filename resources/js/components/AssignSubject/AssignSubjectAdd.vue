@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Subject</h1>
+            <h1 class="m-0">Assign Subject</h1>
           </div><!-- /.col -->
 
 
@@ -24,7 +24,7 @@
             <div class="col-md-6 mx-auto">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Add Subject</h3>
+                  <h3 class="card-title">Add Assign Subject</h3>
                 </div>
                 <div class="card-body">
                   <div class="row">
@@ -60,7 +60,6 @@
                     </div>
                   </div>
                   <router-link :to="{name:'assignsubject'}" class="btn btn-danger">Back</router-link>
-                {{form.class_id}} {{form.subject_id}} {{class_name}} {{subject_names}}
 
                  </div>
 
@@ -91,7 +90,8 @@
                     </div>
                   </div>
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary mt-2">Insert Listed</button>
+                    <button type="submit" class="btn btn-primary mt-2" disabled v-if="this.form.class_id.length === 0 || this.subject_names.length === 0">Insert Listed</button>
+                    <button type="submit" class="btn btn-primary mt-2" v-else>Insert Listed</button>
                   </div>
 
                 </div>

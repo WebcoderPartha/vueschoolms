@@ -61,7 +61,19 @@ class AssignSubjectController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Delete old data
+        AssignSubject::where('class_id', $id)->delete();
+
+        for($i = 0; $i < count($request->subject_id); $i++){
+            AssignSubject::create([
+                'class_id' => $request->class_id,
+                'subject_id' => $request->subject_id[$i]
+            ]);
+        }
+
+        return Response::json('Assign subject added successfully!', 200);
+
+
     }
 
     /**
