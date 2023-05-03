@@ -92,10 +92,8 @@ export default {
     return {
 
       examFees: [],
-      checkBox: [
-        // {year_id:0, month_id: 0}
-      ],
-      year_id: []
+      checkBox: [],
+
     }
   },
   computed: {

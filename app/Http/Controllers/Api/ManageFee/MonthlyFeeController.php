@@ -116,6 +116,19 @@ class MonthlyFeeController extends Controller
     public function allDelete(Request $request){
 
 
+        $countClass = count($request->checkBox);
+
+        for ($i = 0; $i < $countClass; $i++){
+
+            MonthlyFee::where([
+                'year_id' => $request->checkBox[$i]['year_id'],
+                'month_id' => $request->checkBox[$i]['month_id'],
+            ])->delete();
+
+        }
+
+        return Response::json('Deleted data successfully!', 200);
+
 
     }
 

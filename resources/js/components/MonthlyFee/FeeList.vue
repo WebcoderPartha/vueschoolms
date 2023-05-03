@@ -45,7 +45,7 @@
                     <td>{{ monthlyFee.month.name }}</td>
                     <td>
 
-                      <input type="checkbox" :value="{year_:monthlyFee.year_id, month_id:monthlyFee.month_id}" multiple v-model="checkBox">
+                      <input type="checkbox" :value="{year_id:monthlyFee.year_id, month_id:monthlyFee.month_id}" multiple v-model="checkBox">
 
 
                     </td>
@@ -93,15 +93,13 @@ export default {
 
       monthlyFees: [],
       checkBox: [
-        {year_id:0, month_id: 0}
       ],
-      year_id: []
     }
   },
   computed: {
     selectAll: {
       get:function (){
-        return this.monthlyFees ? this.monthlyFees.length === this.checkBox[0].year_id.length : false
+        return this.monthlyFees ? this.monthlyFees.length === this.checkBox.length : false
       },
       set: function (value){
 
