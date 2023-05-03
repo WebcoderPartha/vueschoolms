@@ -25,7 +25,22 @@ class MonthlyFeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $countClass = count($request->class_id);
+
+        for ($i = 0; $i < $countClass; $i++){
+
+            MonthlyFee::create([
+                'year_id' => $request->year_id,
+                'month_id' => $request->month_id,
+                'class_id' => $request->class_id[$i],
+                'amount' => $request->amount[$i],
+            ]);
+
+        }
+
+        return Response::json('Inserted data successfully!');
+
     }
 
     /**

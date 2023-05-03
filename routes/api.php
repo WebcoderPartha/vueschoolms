@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\Setup\AssignSubjectController;
 use App\Http\Controllers\Api\ManageFee\RegistrationFeeController;
 use App\Http\Controllers\Api\ManageFee\ExamFeeController;
 use App\Http\Controllers\Api\ManageFee\MonthlyFeeController;
+use App\Http\Controllers\Api\MonthController;
 
 
 
@@ -65,6 +66,9 @@ Route::middleware('jwtAuth')->group(function (){
     // Registration Fee APIs
     Route::apiResource('regifee', RegistrationFeeController::class);
     Route::post('/regifee/alldel', [RegistrationFeeController::class, 'allDelete']);
+
+    // Monthly Fee APIs
+    Route::apiResource('month', MonthController::class);
 
     // Monthly Fee APIs
     Route::apiResource('monthlyfee', MonthlyFeeController::class);
