@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\ManageFee\RegistrationFeeController;
 use App\Http\Controllers\Api\ManageFee\ExamFeeController;
 use App\Http\Controllers\Api\ManageFee\MonthlyFeeController;
 use App\Http\Controllers\Api\MonthController;
+use App\Http\Controllers\Api\ManageStudent\RegisterStudent;
 
 
 
@@ -85,6 +86,10 @@ Route::middleware('jwtAuth')->group(function (){
     Route::delete('/examfee/{year}/{exam}', [ExamFeeController::class, 'deleteByYearExam']);
     Route::post('/examfee/alldel', [ExamFeeController::class, 'allSelectedDelete']);
 
+
+    // Shift APIs
+    Route::apiResource('student', RegisterStudent::class);
+    Route::post('/student/alldel', [RegisterStudent::class, 'allDelete']);
 
 
 });

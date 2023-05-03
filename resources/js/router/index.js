@@ -194,7 +194,7 @@ const router = createRouter({
 
         // Register Student
         {
-            path:  '/student/view/all',
+            path:  '/student/view-all',
             name: 'studentlist',
             component:()=> import('../components/ManageStudent/StudentRegister/StudentList.vue')
         },
@@ -207,6 +207,11 @@ const router = createRouter({
             path:  '/student/edit/:id',
             name: 'studentedit',
             component:()=> import('../components/ManageStudent/StudentRegister/EditStudent.vue')
+        },
+        {
+            path:  '/student/detail/:id',
+            name: 'studentdetail',
+            component:()=> import('../components/ManageStudent/StudentRegister/StudentDetail.vue')
         },
 
 
