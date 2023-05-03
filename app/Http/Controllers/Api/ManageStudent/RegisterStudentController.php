@@ -133,6 +133,13 @@ class RegisterStudentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
     }
+
+
+    public function allDelete(Request $request){
+
+    }
+
+
 }

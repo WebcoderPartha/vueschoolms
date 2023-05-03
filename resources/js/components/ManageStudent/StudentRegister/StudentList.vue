@@ -45,6 +45,7 @@
                   <tr v-for="(student, index) in studentAll" :key="index+1">
                     <td>{{ student.student.id_number }}</td>
                     <td>{{ student.student.name }}</td>
+                    <td>{{ student.year.name }}</td>
                     <td>{{ student.student_class.name }}</td>
                     <td>{{ student.roll_number }}</td>
                     <td><img width="60" :src="imagePath(student.student.image)" alt=""></td>
@@ -57,7 +58,7 @@
                     <td>
                       <RouterLink :to="{name: 'studentedit', params:{id:student.student.id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>&nbsp;
                       <RouterLink :to="{name: 'studentdetail', params:{id:student.student.id}}" class="badge bg-primary"><i class="fa fa-eye"></i></RouterLink>
-                      &nbsp;<button @click="deleteData(student.id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
+                      &nbsp;<button @click="deleteData(student.student.id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
                     </td>
                   </tr>
 
@@ -90,7 +91,7 @@ export default {
   created() {
     this.authenticate();
     this.pageTitle();
-    this.getExamFee();
+    this.getStudents();
   },
 
   data(){
@@ -108,14 +109,14 @@ export default {
       },
       set: function (value){
 
-        // let arrayValue = [];
-        // if (value){
-        //   this.studentAll.forEach(student => {
-        //     arrayValue.push({year_id:examFee.year_id, exam_type_id: examFee.exam_type_id})
-        //   });
-        // }
-        //
-        // this.checkBox = arrayValue;
+        let arrayValue = [];
+        if (value){
+          this.studentAll.forEach(student => {
+            arrayValue.push(student.student.id)
+          });
+        }
+
+        this.checkBox = arrayValue;
 
       }
     }
@@ -136,8 +137,8 @@ export default {
           let data = {
             checkBox: this.checkBox
           }
-          axios.post('/examfee/alldel', data).then(res => {
-            this.getExamFee();
+          axios.post('/student/alldel', data).then(res => {
+            this.getStudents();
             this.checkBox = []
             Notification.success(res.data);
           })
@@ -151,7 +152,7 @@ export default {
 
     },
 
-    deleteData(year_id, exam_type_id){
+    deleteData(id){
 
       Swal.fire({
         title: 'Are you sure?'+this.partha,
@@ -163,8 +164,8 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          axios.delete('/examfee/'+year_id+'/'+exam_type_id).then(res => {
-            this.getExamFee()
+          axios.delete('/student/'+id).then(res => {
+            this.getStudents()
           })
           Swal.fire(
               'Deleted!',
@@ -185,7 +186,7 @@ export default {
       }
     },
 
-    getExamFee(){
+    getStudents(){
       axios.get('/student').then(res => {
 
         this.studentAll = res.data;
