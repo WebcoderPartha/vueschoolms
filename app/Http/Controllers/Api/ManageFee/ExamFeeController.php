@@ -25,7 +25,20 @@ class ExamFeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $classCount = count($request->class_id);
+
+        for ($i = 0; $i < $classCount; $i++){
+
+            ExamFee::create([
+                'year_id' => $request->year_id,
+                'exam_type_id' => $request->exam_type_id,
+                'class_id' => $request->class_id[$i],
+                'amount' => $request->amount[$i],
+            ]);
+
+        }
+
+        return Response::json('Inserted data successfully!');
     }
 
     /**
