@@ -192,6 +192,23 @@ const router = createRouter({
             component:()=> import('../components/ExamFee/FeeDetail.vue')
         },
 
+        // Register Student
+        {
+            path:  '/student/view/all',
+            name: 'studentlist',
+            component:()=> import('../components/ManageStudent/StudentRegister/StudentList.vue')
+        },
+        {
+            path:  '/student/add',
+            name: 'studentadd',
+            component:()=> import('../components/ManageStudent/StudentRegister/AddStudent.vue')
+        },
+        {
+            path:  '/student/edit/:id',
+            name: 'studentedit',
+            component:()=> import('../components/ManageStudent/StudentRegister/EditStudent.vue')
+        },
+
 
     ]
 

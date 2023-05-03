@@ -134,6 +134,27 @@
           </li>
 
 
+          <li class="nav-item" :class="(this.$route.path === '/student/view-all') ? 'menu-open' : ''">
+            <a href="#" class="nav-link" :class="(this.$route.path === '/student/view-all') ? 'active' : ''">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Manage Student
+                <i class="right fas fa-angle-right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <RouterLink :to="{name:'studentlist'}"  :class="this.$route.path === '/student/view-all' ? 'active' : ''" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Register Student</p>
+                </RouterLink>
+              </li>
+
+
+            </ul>
+          </li>
+
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
