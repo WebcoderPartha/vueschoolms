@@ -50,8 +50,8 @@
 
                     </td>
                     <td>
-                      <RouterLink :to="{name: 'edit_monthlyfee', params:{year:examFee.year_id, exam:examFee.exam_type_id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>&nbsp;
-                      <RouterLink :to="{name: 'monthlyfee_detail', params:{year:examFee.year_id, exam:examFee.exam_type_id}}" class="badge bg-primary"><i class="fa fa-eye"></i></RouterLink>
+                      <RouterLink :to="{name: 'edit_examfee', params:{year:examFee.year_id, exam:examFee.exam_type_id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>&nbsp;
+                      <RouterLink :to="{name: 'examfee_datail', params:{year:examFee.year_id, exam:examFee.exam_type_id}}" class="badge bg-primary"><i class="fa fa-eye"></i></RouterLink>
                       &nbsp;<button @click="deleteData(examFee.year_id, examFee.exam_type_id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
                     </td>
                   </tr>
@@ -93,7 +93,7 @@ export default {
 
       examFees: [],
       checkBox: [
-        {year_id:0, month_id: 0}
+        // {year_id:0, month_id: 0}
       ],
       year_id: []
     }

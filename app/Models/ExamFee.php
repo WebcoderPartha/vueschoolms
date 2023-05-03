@@ -17,4 +17,10 @@ class ExamFee extends Model
     public function exam(){
         return $this->belongsTo(ExamType::class, 'exam_type_id', 'id');
     }
+
+    public function student_class(){
+        return $this->belongsTo(StudentClass::class, 'class_id', 'id');
+    }
+
+
 }

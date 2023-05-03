@@ -72,17 +72,17 @@ Route::middleware('jwtAuth')->group(function (){
 
     // Monthly Fee APIs
     Route::apiResource('monthlyfee', MonthlyFeeController::class);
-    Route::get('monthlyfee/{year}/{class}', [MonthlyFeeController::class, 'showByYearMonth']);
-    Route::put('monthlyfee/{year}/{class}', [MonthlyFeeController::class, 'updateByYearMonth']);
-    Route::delete('monthlyfee/{year}/{class}', [MonthlyFeeController::class, 'deleteByYearMonth']);
+    Route::get('/monthlyfee/{year}/{month}', [MonthlyFeeController::class, 'showByYearMonth']);
+    Route::put('/monthlyfee/{year}/{month}', [MonthlyFeeController::class, 'updateByYearMonth']);
+    Route::delete('/monthlyfee/{year}/{month}', [MonthlyFeeController::class, 'deleteByYearMonth']);
     Route::post('/monthlyfee/alldel', [MonthlyFeeController::class, 'allDelete']);
 
 
     // Exam Fee APIs
     Route::apiResource('examfee', ExamFeeController::class);
-    Route::get('examfee/{year}/{class}', [ExamFeeController::class, 'showByYearMonth']);
-    Route::put('examfee/{year}/{class}', [ExamFeeController::class, 'updateByYearMonth']);
-    Route::delete('examfee/{year}/{class}', [ExamFeeController::class, 'deleteByYearMonth']);
+    Route::get('/examfee/{year}/{exam}', [ExamFeeController::class, 'ExamFeeShowByYear']);
+    Route::put('/examfee/{year}/{exam}', [ExamFeeController::class, 'updateByYearExam']);
+    Route::delete('/examfee/{year}/{exam}', [ExamFeeController::class, 'deleteByYearExam']);
     Route::post('/examfee/alldel', [ExamFeeController::class, 'allDelete']);
 
 

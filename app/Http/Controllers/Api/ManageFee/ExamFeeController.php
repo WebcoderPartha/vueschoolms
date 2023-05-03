@@ -44,6 +44,41 @@ class ExamFeeController extends Controller
     /**
      * Display the specified resource.
      */
+
+    public function ExamFeeShowByYear($year, $exam){
+
+        $data = ExamFee::with('year', 'exam', 'student_class')->where([
+            'year_id' => $year,
+            'exam_type_id' => $exam
+        ])->get();
+
+        return Response::json($data);
+    }
+
+    public function updateByYearExam(Request $request, $year, $exam){
+
+        ExamFee::where([
+            'year_id' => $year,
+            'exam_type_id' => $exam
+        ])->delete();
+
+        $countClass = count($request->class_id);
+
+        for ($i = 0; $i < $countClass; $i++){
+
+            ExamFee::create([
+                'year_id' => $request->year_id,
+                'exam_type_id' => $request->exam_type_id,
+                'class_id' => $request->class_id[$i],
+                'amount' => $request->amount[$i],
+            ]);
+
+        }
+
+        return Response::json('updated data successfully!', 200);
+    }
+
+
     public function show(string $id)
     {
         //
@@ -71,5 +106,14 @@ class ExamFeeController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function deleteByYearExam($year, $exam){
+        ExamFee::where([
+            'year_id' => $year,
+            'exam_type_id' => $exam
+        ])->delete();
+
+        return Response::json('Deleted data successfully!', 200);
     }
 }
