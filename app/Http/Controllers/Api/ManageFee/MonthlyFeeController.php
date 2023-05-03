@@ -3,25 +3,22 @@
 namespace App\Http\Controllers\Api\ManageFee;
 
 use App\Http\Controllers\Controller;
+use App\Models\MonthlyFee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
-class MonthlyFee extends Controller
+class MonthlyFeeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $data = MonthlyFee::with('year', 'month')->select('year_id', 'month_id')->groupBy(['year_id', 'month_id'])->get();
+        return Response::json($data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -62,4 +59,10 @@ class MonthlyFee extends Controller
     {
         //
     }
+
+    public function allDelete(Request $request){
+
+    }
+
+
 }
