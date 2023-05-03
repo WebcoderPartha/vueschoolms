@@ -45,7 +45,7 @@
                     <td>{{ monthlyFee.month.name }}</td>
                     <td>
 
-                      <input type="checkbox" :value="monthlyFee.year_id" :partha="monthlyFee.month_id" v-model="checkBox">
+                      <input type="checkbox" :value="{year_:monthlyFee.year_id, month_id:monthlyFee.month_id}" multiple v-model="checkBox">
 
 
                     </td>
@@ -87,26 +87,28 @@ export default {
     this.pageTitle();
     this.getMonthlyFee();
   },
-  props: ['partha'],
+
   data(){
     return {
 
       monthlyFees: [],
-      checkBox: [],
+      checkBox: [
+        {year_id:0, month_id: 0}
+      ],
       year_id: []
     }
   },
   computed: {
     selectAll: {
       get:function (){
-        return this.monthlyFees ? this.monthlyFees.length === this.checkBox.length : false
+        return this.monthlyFees ? this.monthlyFees.length === this.checkBox[0].year_id.length : false
       },
       set: function (value){
 
         let arrayValue = [];
         if (value){
           this.monthlyFees.forEach(monthlyFee => {
-            arrayValue.push(monthlyFee.class_id)
+            arrayValue.push({year_id:monthlyFee.year_id, month_id: monthlyFee.month_id})
           });
         }
 
@@ -145,8 +147,8 @@ export default {
       })
 
     },
-    yearIdEvent(e){
-
+    MonthIdGet(month_id){
+      console.log(month_id)
     },
     deleteData(year_id, month_id){
 

@@ -78,5 +78,13 @@ Route::middleware('jwtAuth')->group(function (){
     Route::post('/monthlyfee/alldel', [MonthlyFeeController::class, 'allDelete']);
 
 
+    // Exam Fee APIs
+    Route::apiResource('examfee', ExamFeeController::class);
+    Route::get('examfee/{year}/{class}', [ExamFeeController::class, 'showByYearMonth']);
+    Route::put('examfee/{year}/{class}', [ExamFeeController::class, 'updateByYearMonth']);
+    Route::delete('examfee/{year}/{class}', [ExamFeeController::class, 'deleteByYearMonth']);
+    Route::post('/examfee/alldel', [ExamFeeController::class, 'allDelete']);
+
+
 
 });

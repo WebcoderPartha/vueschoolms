@@ -177,7 +177,7 @@ const router = createRouter({
             component:()=> import('../components/ExamFee/FeeList.vue')
         },
         {
-            path:  '/exam/fees/edit/:id',
+            path:  '/exam/fees/edit/:year/:exam',
             name: 'edit_examfee',
             component:()=> import('../components/ExamFee/FeeEdit.vue')
         },
@@ -187,7 +187,7 @@ const router = createRouter({
             component:()=> import('../components/ExamFee/FeeAdd.vue')
         },
         {
-            path:  '/exam/fees/detail/:id',
+            path:  '/exam/fees/detail/:year/:exam',
             name: 'examfee_datail',
             component:()=> import('../components/ExamFee/FeeDetail.vue')
         },
