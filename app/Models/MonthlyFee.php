@@ -16,5 +16,8 @@ class MonthlyFee extends Model
     public function month(){
         return $this->belongsTo(Month::class, 'month_id', 'id');
     }
+    public function student_class(){
+        return $this->belongsTo(StudentClass::class, 'class_id', 'id');
+    }
 
 }

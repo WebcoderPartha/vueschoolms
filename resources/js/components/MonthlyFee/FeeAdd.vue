@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Add Registration Fee</h1>
+            <h1 class="m-0">Add Monthly Fee</h1>
           </div><!-- /.col -->
 
 
@@ -24,7 +24,7 @@
             <div class="col-md-8 mx-auto">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Add Registration Fee</h3>
+                  <h3 class="card-title">Add Monthly Fee</h3>
                 </div>
                 <div class="card-body">
 
@@ -85,7 +85,7 @@
                   </div>
                   class-id: {{form.class_id}} Amount: {{form.amount}} Year_id:{{form.year_id}}<br>
                   class Show: {{class_show}} Year_id:{{year_show}} || month_id {{form.month_id}} || {{show_month}}
-                  <router-link :to="{name:'regifee'}" class="btn btn-danger">Back</router-link>
+                  <router-link :to="{name:'monthlyfee'}" class="btn btn-danger">Back</router-link>
 
                 </div>
 
@@ -190,7 +190,7 @@ export default {
   methods:{
 
     pageTitle(){
-      document.title = 'Add Registration Fee'
+      document.title = 'Add Monthly Fee'
     },
     authenticate(){
       if (!User.authenticate()){

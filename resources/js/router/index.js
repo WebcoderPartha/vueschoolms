@@ -155,7 +155,7 @@ const router = createRouter({
             component:()=> import('../components/MonthlyFee/FeeList.vue')
         },
         {
-            path:  '/monthly/fees/edit/:id',
+            path:  '/monthly/fees/edit/:year/:month',
             name: 'edit_monthlyfee',
             component:()=> import('../components/MonthlyFee/FeeEdit.vue')
         },
@@ -165,7 +165,7 @@ const router = createRouter({
             component:()=> import('../components/MonthlyFee/FeeAdd.vue')
         },
         {
-            path:  '/monthly/fees/detail/:id',
+            path:  '/monthly/fees/detail/:year/:month',
             name: 'monthlyfee_detail',
             component:()=> import('../components/MonthlyFee/FeeDetail.vue')
         },

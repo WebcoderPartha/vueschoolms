@@ -39,19 +39,19 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr v-for="(monthlyFee, index) in monthlyFees" :key="index">
+                  <tr v-for="(monthlyFee, index) in monthlyFees" :key="index+1">
                     <td>{{ index + 1 }}</td>
                     <td>{{ monthlyFee.year.name }}</td>
                     <td>{{ monthlyFee.month.name }}</td>
                     <td>
 
-                      <input type="checkbox" :value="monthlyFee.year_id" v-model="checkBox">
+                      <input type="checkbox" :value="monthlyFee.year_id" :partha="monthlyFee.month_id" v-model="checkBox">
 
 
                     </td>
                     <td>
-                      <RouterLink :to="{name: 'edit_monthlyfee', params:{id:monthlyFee.year_id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>&nbsp;
-                      <RouterLink :to="{name: 'monthlyfee_detail', params:{id:monthlyFee.year_id}}" class="badge bg-primary"><i class="fa fa-eye"></i></RouterLink>
+                      <RouterLink :to="{name: 'edit_monthlyfee', params:{year:monthlyFee.year_id, month:monthlyFee.month_id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>&nbsp;
+                      <RouterLink :to="{name: 'monthlyfee_detail', params:{year:monthlyFee.year_id, month:monthlyFee.month_id}}" class="badge bg-primary"><i class="fa fa-eye"></i></RouterLink>
                       &nbsp;<button @click="deleteData(monthlyFee.year_id, monthlyFee.month_id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
                     </td>
                   </tr>
@@ -87,11 +87,13 @@ export default {
     this.pageTitle();
     this.getMonthlyFee();
   },
+  props: ['partha'],
   data(){
     return {
 
       monthlyFees: [],
-      checkBox: []
+      checkBox: [],
+      year_id: []
     }
   },
   computed: {
@@ -143,9 +145,13 @@ export default {
       })
 
     },
+    yearIdEvent(e){
+
+    },
     deleteData(year_id, month_id){
+
       Swal.fire({
-        title: 'Are you sure?',
+        title: 'Are you sure?'+this.partha,
         // text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,

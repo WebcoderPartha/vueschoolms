@@ -53,10 +53,10 @@ class MonthlyFeeController extends Controller
 
     public function showByYearMonth($year, $month){
 
-        $data = MonthlyFee::where([
+        $data = MonthlyFee::with('year', 'month', 'student_class')->where([
             'year_id' => $year,
             'month_id' => $month
-        ])->first();
+        ])->get();
 
         return Response::json($data);
     }
