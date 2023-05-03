@@ -52,7 +52,7 @@
                     <td>
                       <RouterLink :to="{name: 'edit_monthlyfee', params:{id:monthlyFee.year_id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>&nbsp;
                       <RouterLink :to="{name: 'monthlyfee_detail', params:{id:monthlyFee.year_id}}" class="badge bg-primary"><i class="fa fa-eye"></i></RouterLink>
-                      &nbsp;<button @click="deleteData(monthlyFee.year_id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
+                      &nbsp;<button @click="deleteData(monthlyFee.year_id, monthlyFee.month_id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
                     </td>
                   </tr>
 
@@ -143,7 +143,7 @@ export default {
       })
 
     },
-    deleteData(id){
+    deleteData(year_id, month_id){
       Swal.fire({
         title: 'Are you sure?',
         // text: "You won't be able to revert this!",
@@ -154,9 +154,9 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          axios.delete('/monthlyfee/'+id).then(res => {
+          axios.delete('/monthlyfee/'+year_id+'/'+month_id).then(res => {
             return this.monthlyFees = this.monthlyFees.filter(monthlyFee => {
-              return monthlyFee.year_id !== id
+              return monthlyFee.year_id !== year_id
             })
           })
           Swal.fire(
@@ -181,8 +181,8 @@ export default {
     getMonthlyFee(){
       axios.get('/monthlyfee').then(res => {
 
-        this.registrationFees = res.data;
-        console.log(this.registrationFees)
+        this.monthlyFees = res.data;
+        console.log(this.monthlyFees)
       })
     }
 

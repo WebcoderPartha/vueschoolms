@@ -72,6 +72,8 @@ Route::middleware('jwtAuth')->group(function (){
 
     // Monthly Fee APIs
     Route::apiResource('monthlyfee', MonthlyFeeController::class);
+    Route::put('monthlyfee/{year}/{class}', [MonthlyFeeController::class, 'updateByYearMonth']);
+    Route::delete('monthlyfee/{year}/{class}', [MonthlyFeeController::class, 'deleteByYearMonth']);
     Route::post('/monthlyfee/alldel', [MonthlyFeeController::class, 'allDelete']);
 
 
