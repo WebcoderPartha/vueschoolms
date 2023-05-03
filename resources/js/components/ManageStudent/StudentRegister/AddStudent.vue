@@ -211,7 +211,10 @@
 
 
 
-                  <router-link :to="{name:'examfee'}" class="btn btn-danger">Back</router-link>
+                  <div class="">
+                    <button type="submit" class="btn btn-primary">Add Student</button>
+                    <router-link :to="{name:'studentlist'}" class="btn btn-danger float-right">Back</router-link>
+                  </div>
 
                 </div>
 
@@ -308,7 +311,7 @@ export default {
 
       axios.post('/student', this.form)
           .then(response => {
-            this.$router.push({name: 'examfee'})
+            this.$router.push({name: 'studentlist'})
             Notification.success(response.data);
           }).catch(error => {
         this.errors = error.response.data.errors

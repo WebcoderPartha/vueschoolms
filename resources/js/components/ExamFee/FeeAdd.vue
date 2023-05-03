@@ -251,9 +251,9 @@ export default {
 
     storeData(){
 
-      axios.post('/examfee', this.form)
+      axios.post('/student', this.form)
           .then(response => {
-            this.$router.push({name: 'examfee'})
+            this.$router.push({name: 'studentlist'})
             Notification.success(response.data);
           }).catch(error => {
         this.errors = error.response.data.errors

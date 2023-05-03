@@ -14,7 +14,7 @@ use App\Http\Controllers\Api\ManageFee\RegistrationFeeController;
 use App\Http\Controllers\Api\ManageFee\ExamFeeController;
 use App\Http\Controllers\Api\ManageFee\MonthlyFeeController;
 use App\Http\Controllers\Api\MonthController;
-use App\Http\Controllers\Api\ManageStudent\RegisterStudent;
+use App\Http\Controllers\Api\ManageStudent\RegisterStudentController;
 
 
 
@@ -88,8 +88,8 @@ Route::middleware('jwtAuth')->group(function (){
 
 
     // Shift APIs
-    Route::apiResource('student', RegisterStudent::class);
-    Route::post('/student/alldel', [RegisterStudent::class, 'allDelete']);
+    Route::apiResource('student', RegisterStudentController::class);
+    Route::post('/student/alldel', [RegisterStudentController::class, 'allDelete']);
 
 
 });
