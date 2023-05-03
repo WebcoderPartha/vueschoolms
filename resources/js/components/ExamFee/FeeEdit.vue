@@ -83,8 +83,7 @@
 
                     </div>
                   </div>
-                  class-id: {{form.class_id}} Amount: {{form.amount}} Year_id:{{form.year_id}}<br>
-                  class Show: {{class_show}} Year_id:{{year_show}} || month_id {{form.exam_type_id}} || {{show_exam}}
+
                   <router-link :to="{name:'examfee'}" class="btn btn-danger">Back</router-link>
 
                 </div>

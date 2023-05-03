@@ -133,7 +133,7 @@ export default {
           let data = {
             checkBox: this.checkBox
           }
-          axios.post('/examFees/alldel', data).then(res => {
+          axios.post('/examfee/alldel', data).then(res => {
             this.getExamFee();
             this.checkBox = []
             Notification.success(res.data);
@@ -161,9 +161,7 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           axios.delete('/examfee/'+year_id+'/'+exam_type_id).then(res => {
-            return this.examFees = this.examFees.filter(examFee => {
-              return examFee.year_id !== year_id
-            })
+            this.getExamFee()
           })
           Swal.fire(
               'Deleted!',

@@ -83,7 +83,7 @@ Route::middleware('jwtAuth')->group(function (){
     Route::get('/examfee/{year}/{exam}', [ExamFeeController::class, 'ExamFeeShowByYear']);
     Route::put('/examfee/{year}/{exam}', [ExamFeeController::class, 'updateByYearExam']);
     Route::delete('/examfee/{year}/{exam}', [ExamFeeController::class, 'deleteByYearExam']);
-    Route::post('/examfee/alldel', [ExamFeeController::class, 'allDelete']);
+    Route::post('/examfee/alldel', [ExamFeeController::class, 'allSelectedDelete']);
 
 
 

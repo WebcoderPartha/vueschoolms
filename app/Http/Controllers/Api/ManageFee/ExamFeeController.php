@@ -79,36 +79,12 @@ class ExamFeeController extends Controller
     }
 
 
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    public function deleteByYearExam(string $year, $exam){
 
-    public function deleteByYearExam($year, $exam){
+
         ExamFee::where([
             'year_id' => $year,
             'exam_type_id' => $exam
@@ -116,4 +92,25 @@ class ExamFeeController extends Controller
 
         return Response::json('Deleted data successfully!', 200);
     }
+
+
+    public function allSelectedDelete(Request $request){
+
+
+        $countClass = count($request->checkBox);
+
+        for ($i = 0; $i < $countClass; $i++){
+
+            ExamFee::where([
+                'year_id' => $request->checkBox[$i]['year_id'],
+                'exam_type_id' => $request->checkBox[$i]['exam_type_id'],
+            ])->delete();
+
+        }
+
+        return Response::json('Deleted data successfully!', 200);
+    }
+
+
+
 }
