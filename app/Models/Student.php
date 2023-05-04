@@ -10,6 +10,10 @@ class Student extends Model
     use HasFactory;
     protected $guarded = [];
 
+    public function assign_student(){
+        return $this->belongsTo(AssignStudent::class, 'id', 'student_id');
+    }
+
 
 
 

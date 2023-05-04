@@ -145,9 +145,7 @@ export default {
       })
 
     },
-    MonthIdGet(month_id){
-      console.log(month_id)
-    },
+
     deleteData(year_id, month_id){
 
       Swal.fire({
@@ -188,7 +186,7 @@ export default {
       axios.get('/monthlyfee').then(res => {
 
         this.monthlyFees = res.data;
-        console.log(this.monthlyFees)
+
       })
     }
 

@@ -180,7 +180,6 @@ export default {
       axios.get('/regifee').then(res => {
 
         this.registrationFees = res.data;
-        console.log(this.registrationFees)
       })
     }
 

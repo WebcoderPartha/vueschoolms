@@ -184,7 +184,6 @@ export default {
       axios.get('/examfee').then(res => {
 
         this.examFees = res.data;
-        console.log(this.examFees)
       })
     }
 
