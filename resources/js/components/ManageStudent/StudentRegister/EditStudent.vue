@@ -89,8 +89,10 @@
                         </div>
                         <select class="form-control" v-model="form.gender">
                           <option value="">Select gender</option>
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
+                          <option value="Male" selected v-if="form.gender === 'Male'">Male</option>
+                          <option value="Male" v-else>Male</option>
+                          <option value="Female" v-if="form.gender === 'Female'">Female</option>
+                          <option value="Female" v-else>Female</option>
                         </select>
                       </div>
                       <!--                      <small class="text-red" v-if="errors.name">{{ errors.name[0]}}</small>-->

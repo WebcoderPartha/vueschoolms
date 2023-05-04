@@ -159,7 +159,7 @@ class RegisterStudentController extends Controller
             $student->image = $directory.$photo;
             $student->save();
 
-            return Response::json('Customer updated successfully');
+            return Response::json('Student updated successfully');
 
         }else{
 
@@ -175,64 +175,12 @@ class RegisterStudentController extends Controller
 
             $student->save();
 
-            return Response::json('Customer updated successfully');
+            return Response::json('Student updated successfully');
 
         } // end else
 
 
-//        if ($request->file('new_image')){
-//
-//            $position  = strpos($request->new_image, ';');
-//            $sub = substr($request->new_image, 0, $position);
-//            $extension = explode('/', $sub)[1];
-//
-//            $photo = time().'-student'.'.'.$extension;
-//            $directory = 'uploads/student/';
-//
-//            Image::make($request->new_image)->resize(300, 300)->save(public_path($directory.$photo));
-//
-//            if ($student->image !== NULL){
-//                if (file_exists(public_path($student->image))){
-//                    unlink(public_path($student->image));
-//                }
-//            }
-//
-//
-//            $student->name = $request->form['name'];
-//            $student->father_name = $request->form['father_name'];
-//            $student->mother_name = $request->form['mother_name'];
-//            $student->email = $request->form['email'];
-//            $student->phone = $request->form['phone'];
-//            $student->address = $request->form['address'];
-//            $student->date_of_birth = date('Y-m-d', strtotime($request->form['date_of_birth']));
-//            $student->gender = $request->form['gender'];
-//            $student->religion = $request->form['religion'];
-//            $student->image = $directory.$photo;
-//            $student->save();
-//
-//
-//
-//
-//        }else{
-//
-//
-//
-//            $student->name = $request->form['name'];
-//            $student->father_name = $request->form['father_name'];
-//            $student->mother_name = $request->form['mother_name'];
-//            $student->email = $request->form['email'];
-//            $student->phone = $request->form['phone'];
-//            $student->address = $request->form['address'];
-//            $student->date_of_birth = date('Y-m-d', strtotime($request->form['date_of_birth']));
-//            $student->gender = $request->form['gender'];
-//            $student->religion = $request->form['religion'];
-//            $student->save();
-//
-//
-//
-//        }
 
-//        return Response::json('Student updated successfully');
 
     }
 
@@ -241,7 +189,24 @@ class RegisterStudentController extends Controller
      */
     public function destroy(string $id)
     {
+        $student = Student::find($id);
+        $assign_student = AssignStudent::where('student_id', $id)->first();
 
+        if ($student->image !== null){
+            if (file_exists(public_path($student->image))){
+                unlink(public_path($student->image));
+                $student->delete();
+                $assign_student->delete();
+
+            }else{
+                $student->delete();
+                $assign_student->delete();
+            }
+        }
+
+        $student->delete();
+        $assign_student->delete();
+        return Response::json('Student deleted successfully');
     }
 
 
