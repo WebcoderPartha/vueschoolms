@@ -227,6 +227,12 @@ const router = createRouter({
             name: 'payregifee',
             component:()=> import('../components/ManageStudent/PayRegistrationFee/PayRegistrationFeeList.vue')
         },
+        {
+            path:  '/pay/registration/:year/:class/:student',
+            name: 'payregifeeslip',
+            component:()=> import('../components/ManageStudent/PayRegistrationFee/PayRegistrationFeeSlip.vue')
+        },
+
 
 
     ]

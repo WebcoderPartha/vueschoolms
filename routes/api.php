@@ -99,6 +99,7 @@ Route::middleware('jwtAuth')->group(function (){
 
     // Registration Fee Pay
     Route::post('/regifeepay', [FeePayController::class, 'SearchRegistrationFeePayStudent']);
+    Route::get('/regifeepay/{year}/{class}/{student}', [FeePayController::class, 'getRegistrationPaySlipByID']);
 
 
 });

@@ -104,7 +104,7 @@
                   <td>{{ student.regiFee }} Tk</td>
                   <td>{{ student.discount}}%</td>
                   <td>{{ student.final_amount }} Tk</td>
-                  <td><RouterLink to="/" class="btn btn-primary">Pay</RouterLink></td>
+                  <td><RouterLink :to="{name:'payregifeeslip', params:{year:student.year_id, class: student.class_id, student:student.student_id}}" class="btn btn-primary">Pay</RouterLink></td>
 
                 </tr>
                 </tbody>
@@ -197,9 +197,7 @@ export default {
             })
             this.students = [...new Map(this.students.map(item => [item['student_id'], item])).values()]
 
-            console.log(this.students)
-
-
+            // console.log(this.students)
           }).catch(error => {
       })
     },

@@ -24,4 +24,21 @@ class FeePayController extends Controller
         return Response::json($data);
 
     }
+
+    public function getRegistrationPaySlipByID($year, $class, $student){
+        $data['students'] = AssignStudent::with('student', 'student_class', 'year', 'group')->where([
+            'year_id' => $year,
+            'class_id' => $class,
+            'student_id' => $student
+        ])->first();
+
+        $data['registration_fee'] = RegistrationFee::where([
+            'year_id' => $year,
+            'class_id' => $class,
+        ])->first();
+
+        return Response::json($data);
+
+    }
+
 }
