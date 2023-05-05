@@ -228,7 +228,7 @@ const router = createRouter({
             component:()=> import('../components/ManageStudent/PayRegistrationFee/PayRegistrationFeeList.vue')
         },
         {
-            path:  '/pay/registration/:year/:class/:student',
+            path:  '/pay/registration/:year/:class/:student/slip',
             name: 'payregifeeslip',
             component:()=> import('../components/ManageStudent/PayRegistrationFee/PayRegistrationFeeSlip.vue')
         },
@@ -238,6 +238,11 @@ const router = createRouter({
             path:  '/pay/monthly/fee',
             name: 'paymonthlyfee',
             component:()=> import('../components/ManageStudent/PayMonthlyFee/PayMonthlyFeeList.vue')
+        },
+        {
+            path:  '/pay/monthly/:year/:month/:class/:student/slip',
+            name: 'paymonthlyfeeslip',
+            component:()=> import('../components/ManageStudent/PayMonthlyFee/MonthlyFeePaySlip.vue')
         },
 
 

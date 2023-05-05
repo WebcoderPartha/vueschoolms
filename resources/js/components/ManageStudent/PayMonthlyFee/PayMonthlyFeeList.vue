@@ -102,6 +102,7 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Year</th>
+                <th>Month</th>
                 <th>Class</th>
                 <th>Group</th>
                 <th>Shift</th>
@@ -113,12 +114,13 @@
                 <td>{{ student.student.id_number}}</td>
                 <td>{{ student.student.name}}</td>
                 <td>{{ student.year.name}}</td>
+                <td>{{ monthly_fee.month_name}}</td>
                 <td>{{ student.student_class.name}}</td>
                 <td>{{ student.group.name }}</td>
                 <td>{{ student.shift.name }}</td>
-                <td>{{ monthly_fee}} Tk</td>
+                <td>{{ monthly_fee.amount}} Tk</td>
 
-<!--                <td><RouterLink :to="{name:'payregifeeslip', params:{year:student.year_id, class: student.class_id, student:student.student_id}}" class="btn btn-primary">Pay</RouterLink></td>-->
+                <td><RouterLink :to="{name:'paymonthlyfeeslip', params:{year:student.year_id,month:monthly_fee.month_id, class: student.class_id, student:student.student_id}}" class="btn btn-primary">Pay</RouterLink></td>
 
               </tr>
               </tbody>
@@ -198,7 +200,11 @@ export default {
         axios.post('/monthlyfeepay', this.search)
             .then(response => {
               this.students = response.data.students;
-              this.monthly_fee = response.data.monthly_fee.amount;
+              this.monthly_fee = {
+                month_id:  response.data.monthly_fee.month_id,
+                month_name:  response.data.monthly_fee.month.name,
+                amount:  response.data.monthly_fee.amount,
+              };
 
               // console.log(this.students)
             }).catch(error => {

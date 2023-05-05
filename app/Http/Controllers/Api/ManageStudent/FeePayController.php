@@ -49,7 +49,7 @@ class FeePayController extends Controller
             'class_id' => $request->class_id
         ])->orderBy('id', 'desc')->get();
 
-        $data['monthly_fee'] = MonthlyFee::where([
+        $data['monthly_fee'] = MonthlyFee::with('month')->where([
             'year_id' => $request->year_id,
             'month_id' => $request->month_id,
             'class_id' => $request->class_id
