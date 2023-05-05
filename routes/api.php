@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\ManageFee\ExamFeeController;
 use App\Http\Controllers\Api\ManageFee\MonthlyFeeController;
 use App\Http\Controllers\Api\MonthController;
 use App\Http\Controllers\Api\ManageStudent\RegisterStudentController;
+use App\Http\Controllers\Api\ManageStudent\RollGenerateController;
 
 
 
@@ -87,9 +88,12 @@ Route::middleware('jwtAuth')->group(function (){
     Route::post('/examfee/alldel', [ExamFeeController::class, 'allSelectedDelete']);
 
 
-    // Shift APIs
+    // Student APIs
     Route::apiResource('student', RegisterStudentController::class);
     Route::post('/student/alldel', [RegisterStudentController::class, 'allDelete']);
+
+    // RollGenerate
+    Route::get('/searchrolgen/{year}/{class}', [RollGenerateController::class, 'SearchYearClassRollGenStudent']);
 
 
 });

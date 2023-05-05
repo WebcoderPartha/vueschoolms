@@ -149,6 +149,12 @@
                   <p>Register Student</p>
                 </RouterLink>
               </li>
+              <li class="nav-item">
+                <RouterLink :to="{name:'rollgenerate'}"  :class="this.$route.path === '/roll/generate' ? 'active' : ''" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Roll Generate</p>
+                </RouterLink>
+              </li>
 
 
             </ul>

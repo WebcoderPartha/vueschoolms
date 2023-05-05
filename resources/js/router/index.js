@@ -214,6 +214,13 @@ const router = createRouter({
             component:()=> import('../components/ManageStudent/StudentRegister/StudentDetail.vue')
         },
 
+        // Roll Generate
+        {
+            path:  '/roll/generate',
+            name: 'rollgenerate',
+            component:()=> import('../components/ManageStudent/RollGenerate/RollGenerate.vue')
+        },
+
 
     ]
 
