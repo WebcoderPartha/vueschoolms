@@ -94,6 +94,7 @@ Route::middleware('jwtAuth')->group(function (){
 
     // RollGenerate
     Route::get('/searchrolgen/{year}/{class}', [RollGenerateController::class, 'SearchYearClassRollGenStudent']);
+    Route::put('/rollgenupdate', [RollGenerateController::class, 'updateRollGenerate']);
 
 
 });

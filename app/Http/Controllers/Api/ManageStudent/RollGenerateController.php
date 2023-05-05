@@ -20,5 +20,17 @@ class RollGenerateController extends Controller
         return Response::json($data);
     }
 
+    public function updateRollGenerate(Request $request){
+
+        for ($i = 0; $i < count($request->roll_generate); $i++){
+            AssignStudent::where('student_id', $request->roll_generate[$i]['student_id'])->update([
+                'roll_number' => $request->roll_generate[$i]['roll_number']
+            ]);
+        }
+
+        return Response::json('Roll Generate Successfully!');
+
+    }
+
 
 }

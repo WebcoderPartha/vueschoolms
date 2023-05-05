@@ -19,7 +19,7 @@
     <section class="content">
       <div class="container-fluid">
         <!-- Info boxes -->
-        <form @submit.prevent="storeData">
+
           <div class="row">
             <div class="col-md-8 mx-auto">
               <div class="card">
@@ -67,7 +67,6 @@
             </div>
 
           </div>
-        </form>
         <!-- /.row -->
 
       </div><!--/. container-fluid -->
@@ -76,43 +75,43 @@
     <section class="content">
       <div class="container-fluid">
         <!-- Info boxes -->
-        <form action="">
-          <div class="card">
-            <div class="card-header">
-              <h2 class="text-center">Student List</h2>
-            </div>
-            <div class="card-body">
-              <table class="table table-bordered">
-                <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Year</th>
-                  <th>Class</th>
-                  <th>Shift</th>
-                  <th>Group</th>
-                  <th width="140px">Roll</th>
-                </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="(student, index) in RollGenStudents" :key="index">
-                    <td>{{ student.student.id_number}}</td>
-                    <td>{{ student.student.name}}</td>
-                    <td>{{ student.year.name}}</td>
-                    <td>{{ student.shift.name}}</td>
-                    <td>{{ student.group.name}}</td>
-                    <td>{{ student.student_class.name}}</td>
-                    <td><input type="text" class="form-control" :data-student-id="student.student.id" @change="rollGenerateEvent"  placeholder="Roll"></td>
-
+        <form @submit.prevent="updateRoleGenerate">
+            <div class="card">
+              <div class="card-header">
+                <h2 class="text-center">Student List</h2>
+              </div>
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Year</th>
+                    <th>Class</th>
+                    <th>Shift</th>
+                    <th>Group</th>
+                    <th width="140px">Roll</th>
                   </tr>
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(student, index) in RollGenStudents" :key="index">
+                      <td>{{ student.student.id_number}}</td>
+                      <td>{{ student.student.name}}</td>
+                      <td>{{ student.year.name}}</td>
+                      <td>{{ student.shift.name}}</td>
+                      <td>{{ student.group.name}}</td>
+                      <td>{{ student.student_class.name}}</td>
+                      <td><input type="text" class="form-control" :data-student-id="student.student.id" @change="rollGenerateEvent"  placeholder="Roll"></td>
+
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-footer text-center">
+                <button class="btn btn-primary" type="submit">Roll Generate</button>
+              </div>
             </div>
-            <div class="card-footer text-center">
-              <button class="btn btn-primary" type="submit">Roll Generate</button>
-            </div>
-        </div>
-        </form>
+          </form><!-- /Form -->
 
       </div><!--/. container-fluid -->
     </section>
@@ -175,7 +174,7 @@ export default {
       // Unique Object Array Data
       this.form.roll_generate = [...new Map(this.form.roll_generate.map(item=> [item['student_id'], item])).values()]
 
-      console.log(this.form.roll_generate)
+      // console.log(this.form.roll_generate)
     },
     getClass(){
       axios.get('/class').then(res => this.classes = res.data)
@@ -191,12 +190,14 @@ export default {
           }).catch(error => {
       })
     },
-    storeData(){
-
-      axios.post('/student', this.form)
+    updateRoleGenerate(){
+      let data = {
+        roll_generate: this.form.roll_generate
+      }
+      axios.put('/rollgenupdate', data)
           .then(response => {
-            this.$router.push({name: 'studentlist'})
             Notification.success(response.data);
+            // console.log(response.data);
           }).catch(error => {
         this.errors = error.response.data.errors
       })
