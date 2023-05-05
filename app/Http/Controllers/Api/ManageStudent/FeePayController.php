@@ -59,4 +59,21 @@ class FeePayController extends Controller
 
     }
 
+    public function getMonthlyPaySlipByID($year, $month, $class, $student){
+        $data['students'] = AssignStudent::with('student', 'student_class', 'year', 'group')->where([
+            'year_id' => $year,
+            'class_id' => $class,
+            'student_id' => $student
+        ])->first();
+
+        $data['monthly_fee'] = MonthlyFee::with('month')->where([
+            'year_id' => $year,
+            'month_id' => $month,
+            'class_id' => $class
+        ])->first();
+
+        return Response::json($data);
+
+    }
+
 }

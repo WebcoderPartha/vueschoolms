@@ -144,7 +144,7 @@
 
 
 export default {
-  name: "PayRegistrationFeeList",
+  name: "PayMonthlyFeeList",
   created() {
     this.authenticate();
     this.pageTitle();
@@ -177,7 +177,7 @@ export default {
   methods:{
 
     pageTitle(){
-      document.title = 'Pay Registration Fee'
+      document.title = 'Pay Monthly Fee'
     },
     authenticate(){
       if (!User.authenticate()){
