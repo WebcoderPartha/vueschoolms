@@ -163,6 +163,13 @@
                 </RouterLink>
               </li>
 
+              <li class="nav-item">
+                <RouterLink :to="{name:'paymonthlyfee'}"  :class="this.$route.path === '/pay/monthly/fee' ? 'active' : ''" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Pay Monthly Fee</p>
+                </RouterLink>
+              </li>
+
 
             </ul>
           </li>

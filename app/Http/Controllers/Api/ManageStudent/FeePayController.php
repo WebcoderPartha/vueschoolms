@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\ManageStudent;
 
 use App\Http\Controllers\Controller;
 use App\Models\AssignStudent;
+use App\Models\MonthlyFee;
 use App\Models\RegistrationFee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -35,6 +36,23 @@ class FeePayController extends Controller
         $data['registration_fee'] = RegistrationFee::where([
             'year_id' => $year,
             'class_id' => $class,
+        ])->first();
+
+        return Response::json($data);
+
+    }
+
+
+    public function SearchMonthlyFeePayStudent(Request $request){
+        $data['students'] = AssignStudent::with('student', 'student_class', 'year', 'group', 'shift')->where([
+            'year_id' => $request->year_id,
+            'class_id' => $request->class_id
+        ])->orderBy('id', 'desc')->get();
+
+        $data['monthly_fee'] = MonthlyFee::where([
+            'year_id' => $request->year_id,
+            'month_id' => $request->month_id,
+            'class_id' => $request->class_id
         ])->first();
 
         return Response::json($data);

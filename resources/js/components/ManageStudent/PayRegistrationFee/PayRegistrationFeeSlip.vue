@@ -75,7 +75,7 @@
 
 
 export default {
-  name: "StudentList",
+  name: "PayRegistrationFeeSlip",
   created() {
     this.authenticate();
     this.pageTitle();

@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Pay Registration Fee</h1>
+            <h1 class="m-0">Pay Monthly Fee</h1>
           </div><!-- /.col -->
 
 
@@ -30,9 +30,9 @@
                 </div>
               </div>
               <div class="card-body">
-                <form @submit.prevent="SearchRegistrationFeePay">
+                <form @submit.prevent="SearchMonthlyFee">
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="input-group mb-5">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Year</span>
@@ -44,7 +44,20 @@
                       </div>
                       <!--                      <small class="text-red" v-if="errors.name">{{ errors.name[0]}}</small>-->
                     </div> <!-- End Col -->
-                    <div class="col-md-4">
+
+                    <div class="col-md-3">
+                      <div class="input-group mb-5">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Month</span>
+                        </div>
+                        <select class="form-control" v-model="search.month_id">
+                          <option value="">Select month</option>
+                          <option v-for="month in months" :key="month.id" :value="month.id">{{ month.name }}</option>
+                        </select>
+                      </div>
+                    </div> <!-- End Col -->
+
+                    <div class="col-md-3">
                       <div class="input-group mb-5">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Class</span>
@@ -54,9 +67,9 @@
                           <option v-for="cls in classes" :key="cls.id" :value="cls.id">{{ cls.name }}</option>
                         </select>
                       </div>
-                      <!--                      <small class="text-red" v-if="errors.name">{{ errors.name[0]}}</small>-->
                     </div> <!-- End Col -->
-                    <div class="col-md-2">
+
+                    <div class="col-md-3">
                       <button type="submit" class="btn btn-primary">Search</button>
 
                       <!--                      <small class="text-red" v-if="errors.name">{{ errors.name[0]}}</small>-->
@@ -78,42 +91,43 @@
     <section class="content">
       <div class="container-fluid">
 
-          <div class="card">
-            <div class="card-header">
-              <h2 class="text-center">Student List</h2>
-            </div>
-            <div class="card-body">
-              <table class="table table-bordered">
-                <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Year</th>
-                  <th>Class</th>
-                  <th>Registration Fee</th>
-                  <th>Discount (%)</th>
-                  <th>Final Fee</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(student, index) in students" :key="index">
-                  <td>{{ student.id_number}}</td>
-                  <td>{{ student.name}}</td>
-                  <td>{{ student.year_name}}</td>
-                  <td>{{ student.class_name}}</td>
-                  <td>{{ student.regiFee }} Tk</td>
-                  <td>{{ student.discount}}%</td>
-                  <td>{{ student.final_amount }} Tk</td>
-                  <td><RouterLink :to="{name:'payregifeeslip', params:{year:student.year_id, class: student.class_id, student:student.student_id}}" class="btn btn-primary">Pay</RouterLink></td>
-
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="card-footer text-center">
-<!--              <button class="btn btn-primary" type="submit">Roll Generate</button>-->
-            </div>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="text-center">Student List</h2>
           </div>
+          <div class="card-body">
+            <table class="table table-bordered">
+              <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Year</th>
+                <th>Class</th>
+                <th>Group</th>
+                <th>Shift</th>
+                <th>Monthly Fee</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr v-for="(student, index) in students" :key="index">
+                <td>{{ student.student.id_number}}</td>
+                <td>{{ student.student.name}}</td>
+                <td>{{ student.year.name}}</td>
+                <td>{{ student.student_class.name}}</td>
+                <td>{{ student.group.name }}</td>
+                <td>{{ student.shift.name }}</td>
+                <td>{{ monthly_fee}} Tk</td>
+
+<!--                <td><RouterLink :to="{name:'payregifeeslip', params:{year:student.year_id, class: student.class_id, student:student.student_id}}" class="btn btn-primary">Pay</RouterLink></td>-->
+
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer text-center">
+            <!--              <button class="btn btn-primary" type="submit">Roll Generate</button>-->
+          </div>
+        </div>
 
 
 
@@ -134,6 +148,7 @@ export default {
     this.pageTitle();
     this.getClass();
     this.getyear();
+    this.getMonth();
 
 
   },
@@ -144,13 +159,15 @@ export default {
     return {
       search:{
         class_id: '',
-        year_id: ''
+        year_id: '',
+        month_id: ''
       },
-      // regiFeeStudents: [],
       students: [],
-      registration_fee: '',
+      monthly_fee: '',
+
       years: [],
       classes: [],
+      months: [],
       errors: [],
 
     }
@@ -173,30 +190,15 @@ export default {
     getyear(){
       axios.get('/year').then(res => this.years = res.data)
     },
-    SearchRegistrationFeePay(){
+    getMonth(){
+      axios.get('/month').then(res => this.months = res.data)
+    },
+    SearchMonthlyFee(){
       if (!this.validateData()){
-        axios.post('/regifeepay', this.search)
+        axios.post('/monthlyfeepay', this.search)
             .then(response => {
-              this.regiFeeStudents = response.data.students;
-              this.registration_fee = response.data.registration_fee.amount;
-              let regiFee = response.data.registration_fee.amount
-              response.data.students.forEach(item => {
-                let final_amount = regiFee - (regiFee*item.discount_percentage)/100
-                let data = {
-                  student_id: item.student.id,
-                  id_number: item.student.id_number,
-                  name: item.student.name,
-                  year_id: item.year_id,
-                  class_id: item.class_id,
-                  class_name: item.student_class.name,
-                  year_name: item.year.name,
-                  regiFee: regiFee,
-                  discount: item.discount_percentage,
-                  final_amount:final_amount
-                }
-                this.students.push(data)
-              })
-              this.students = [...new Map(this.students.map(item => [item['student_id'], item])).values()]
+              this.students = response.data.students;
+              this.monthly_fee = response.data.monthly_fee.amount;
 
               // console.log(this.students)
             }).catch(error => {
