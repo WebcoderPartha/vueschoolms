@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\ManageFee\MonthlyFeeController;
 use App\Http\Controllers\Api\MonthController;
 use App\Http\Controllers\Api\ManageStudent\RegisterStudentController;
 use App\Http\Controllers\Api\ManageStudent\RollGenerateController;
+use App\Http\Controllers\Api\ManageStudent\FeePayController;
 
 
 
@@ -95,6 +96,9 @@ Route::middleware('jwtAuth')->group(function (){
     // RollGenerate
     Route::get('/searchrolgen/{year}/{class}', [RollGenerateController::class, 'SearchYearClassRollGenStudent']);
     Route::put('/rollgenupdate', [RollGenerateController::class, 'updateRollGenerate']);
+
+    // Registration Fee Pay
+    Route::post('/regifeepay', [FeePayController::class, 'SearchRegistrationFeePayStudent']);
 
 
 });

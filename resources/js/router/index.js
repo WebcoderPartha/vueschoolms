@@ -221,6 +221,13 @@ const router = createRouter({
             component:()=> import('../components/ManageStudent/RollGenerate/RollGenerate.vue')
         },
 
+        // Pay Registration Fee
+        {
+            path:  '/pay/registration/fee',
+            name: 'payregifee',
+            component:()=> import('../components/ManageStudent/PayRegistrationFee/PayRegistrationFeeList.vue')
+        },
+
 
     ]
 

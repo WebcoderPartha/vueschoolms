@@ -24,7 +24,10 @@
             <div class="col-md-8 mx-auto">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Add Student    <router-link :to="{name:'studentlist'}" class="btn btn-danger float-right">Back</router-link></h3>
+                  <h3 class="card-title">Search Student</h3>
+                  <div>
+                    <router-link :to="{name:'studentlist'}" class="btn btn-danger float-right">Back</router-link>
+                  </div>
                 </div>
                 <div class="card-body">
                   <form @submit.prevent="SearchRollGenerate">
@@ -75,13 +78,13 @@
     <section class="content">
       <div class="container-fluid">
         <!-- Info boxes -->
-        <form @submit.prevent="updateRoleGenerate">
+        <form @submit.prevent="updateRoleGenerate"   v-if="RollGenStudents.length > 0">
             <div class="card">
               <div class="card-header">
                 <h2 class="text-center">Student List</h2>
               </div>
               <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered"  >
                   <thead>
                   <tr>
                     <th>ID</th>
@@ -101,17 +104,19 @@
                       <td>{{ student.shift.name}}</td>
                       <td>{{ student.group.name}}</td>
                       <td>{{ student.student_class.name}}</td>
-                      <td><input type="text" class="form-control" :data-student-id="student.student.id" @change="rollGenerateEvent"  placeholder="Roll"></td>
+                      <td><input type="text" class="form-control" :value="student.roll_number" :data-student-id="student.student.id" @change="rollGenerateEvent"  placeholder="Roll"></td>
 
                     </tr>
                   </tbody>
                 </table>
+
               </div>
               <div class="card-footer text-center">
                 <button class="btn btn-primary" type="submit">Roll Generate</button>
               </div>
             </div>
           </form><!-- /Form -->
+
 
       </div><!--/. container-fluid -->
     </section>
@@ -146,8 +151,6 @@ export default {
         roll_generate: [],
       },
       RollGenStudents: [],
-      add_roll:'',
-      addArray: [],
       years: [],
       classes: [],
 
@@ -186,7 +189,7 @@ export default {
       axios.get('/searchrolgen/'+this.search.year_id+'/'+this.search.class_id)
           .then(response => {
             this.RollGenStudents = response.data;
-            console.log(this.RollGenStudents)
+
           }).catch(error => {
       })
     },
@@ -204,12 +207,12 @@ export default {
 
     },
 
-    validateData(){
-      if (this.form.exam_type_id.length === 0 || this.add_class_id.length === 0 || this.add_amount.length === 0 || this.form.year_id.length === 0){
-        Notification.error('Field must not be empty!')
-        return true;
-      }
-    }
+    // validateData(){
+    //   if (this.form.exam_type_id.length === 0 || this.add_class_id.length === 0 || this.add_amount.length === 0 || this.form.year_id.length === 0){
+    //     Notification.error('Field must not be empty!')
+    //     return true;
+    //   }
+    // }
 
   } // End Method
 }
