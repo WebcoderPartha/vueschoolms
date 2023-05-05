@@ -1,3 +1,4 @@
+
 <template>
   <div class="contentBoxing">
     <!-- Content Header (Page header) -->
@@ -167,9 +168,12 @@ export default {
       }
     },
     rollGenerateEvent(event){
-      let student_id = event.target.getAttribute('data-student-id')
-      let roll_number = event.target.value;
-      this.form.roll_generate.push({student_id: student_id, roll_number: roll_number})
+
+      let data = {student_id: event.target.getAttribute('data-student-id'), roll_number:event.target.value}
+      this.form.roll_generate.push(data)
+
+      // Unique Object Array Data
+      this.form.roll_generate = [...new Map(this.form.roll_generate.map(item=> [item['student_id'], item])).values()]
 
       console.log(this.form.roll_generate)
     },
