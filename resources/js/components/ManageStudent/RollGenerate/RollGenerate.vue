@@ -101,7 +101,7 @@
                     <td>{{ student.shift.name}}</td>
                     <td>{{ student.group.name}}</td>
                     <td>{{ student.student_class.name}}</td>
-                    <td><input type="text" class="form-control" :data-tumi="student.id" :id="student.student.id" @change="rollEvent"  placeholder="Roll"></td>
+                    <td><input type="text" class="form-control" :data-student-id="student.student.id" @change="rollGenerateEvent"  placeholder="Roll"></td>
 
                   </tr>
                 </tbody>
@@ -144,7 +144,6 @@ export default {
       },
       form: {
         roll_generate: [],
-        // student_id: []
       },
       RollGenStudents: [],
       add_roll:'',
@@ -167,7 +166,13 @@ export default {
         this.$router.push({name:'login'})
       }
     },
+    rollGenerateEvent(event){
+      let student_id = event.target.getAttribute('data-student-id')
+      let roll_number = event.target.value;
+      this.form.roll_generate.push({student_id: student_id, roll_number: roll_number})
 
+      console.log(this.form.roll_generate)
+    },
     getClass(){
       axios.get('/class').then(res => this.classes = res.data)
     },
