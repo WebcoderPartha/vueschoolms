@@ -257,6 +257,31 @@ const router = createRouter({
             component:()=> import('../components/ManageStudent/PayExamFee/PayExamFeeSlip.vue')
         },
 
+        // Grade
+        {
+            path:  '/mark/entry',
+            name: 'markentry',
+            component:()=> import('../components/ManageMark/MarkEntry/MarkEntrySearchList.vue')
+        },
+
+
+        // Grade
+        {
+            path:  '/grade/list',
+            name: 'gradelist',
+            component:()=> import('../components/ManageMark/Grade/GradeList.vue')
+        },
+        {
+            path:  '/grade/add',
+            name: 'gradeadd',
+            component:()=> import('../components/ManageMark/Grade/AddGrade.vue')
+        },
+        {
+            path:  '/grade/:id/edit',
+            name: 'editgrade',
+            component:()=> import('../components/ManageMark/Grade/GradeEdit.vue')
+        },
+
 
     ]
 

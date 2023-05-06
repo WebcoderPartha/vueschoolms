@@ -181,6 +181,33 @@
             </ul>
           </li>
 
+          <li class="nav-item" :class="(this.$route.path === '/mark/entry') ? 'menu-open' : ''">
+            <a href="#" class="nav-link" :class="(this.$route.path === '/mark/entry') ? 'active' : ''">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Manage Mark
+                <i class="right fas fa-angle-right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <RouterLink :to="{name:'markentry'}"  :class="this.$route.path === '/mark/entry' ? 'active' : ''" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Mark Entry</p>
+                </RouterLink>
+              </li>
+              <li class="nav-item">
+                <RouterLink :to="{name:'gradelist'}"  :class="this.$route.path === '/grade/list' ? 'active' : ''" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Grade Manage</p>
+                </RouterLink>
+              </li>
+
+
+
+            </ul>
+          </li>
+
 
         </ul>
       </nav>

@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\MonthController;
 use App\Http\Controllers\Api\ManageStudent\RegisterStudentController;
 use App\Http\Controllers\Api\ManageStudent\RollGenerateController;
 use App\Http\Controllers\Api\ManageStudent\FeePayController;
+use App\Http\Controllers\Api\ManageMark\GradeManage\GradeController;
 
 
 
@@ -109,5 +110,7 @@ Route::middleware('jwtAuth')->group(function (){
     Route::post('/examfeepay', [FeePayController::class, 'SearchExamFeePayStudent']);
     Route::get('/examfeepay/{year}/{exam}/{class}/{student}', [FeePayController::class, 'getExamPaySlipByID']);
 
+    // Grade
+    Route::apiResource('grade', GradeController::class);
 
 });

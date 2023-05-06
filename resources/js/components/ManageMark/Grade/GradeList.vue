@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Student List</h1>
+            <h1 class="m-0">Grade List</h1>
           </div><!-- /.col -->
 
 
@@ -19,52 +19,33 @@
       <div class="container-fluid">
         <!-- Info boxes -->
         <div class="row">
-          <div class="col-md-10 mx-auto">
+          <div class="col-md-6 mx-auto">
             <div class="card">
               <div class="card-header">
-                <h3>Student List <RouterLink :to="{name:'studentadd'}" class="btn btn-primary float-right">Add Student</RouterLink></h3>
+                <h3>Grade List <RouterLink :to="{name:'gradeadd'}" class="btn btn-primary float-right">Add Grade</RouterLink></h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-bordered" v-show="studentAll.length > 0">
+                <table class="table table-bordered">
                   <thead>
                   <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Year</th>
-                    <th>Class</th>
-                    <th>Roll</th>
-                    <th>Image</th>
-                    <th><input type="checkbox" v-model="selectAll"> Select All
-                      <button class="btn btn-sm btn-danger" @click="deleteAll" v-show="checkBox.length > 0"><i class="fa fa-trash-alt"></i></button>
-                    </th>
+                    <th>Class Interval</th>
+                    <th>Letter Grade</th>
+                    <th>Grade Point</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr v-for="(student, index) in studentAll" :key="index+1">
-                    <td>{{ student.student.id_number }}</td>
-                    <td>{{ student.student.name }}</td>
-                    <td>{{ student.year.name }}</td>
-                    <td>{{ student.student_class.name }}</td>
-                    <td>{{ student.roll_number }}</td>
-                    <td><img width="60" :src="imagePath(student.student.image)" alt=""></td>
-                    <td>
-
-                      <input type="checkbox" :value="student.student_id" v-model="checkBox">
-
-
-                    </td>
-                    <td>
-                      <RouterLink :to="{name: 'studentedit', params:{id:student.student_id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>&nbsp;
-                      <RouterLink :to="{name: 'studentdetail', params:{id:student.student_id}}" class="badge bg-primary"><i class="fa fa-eye"></i></RouterLink>
-                      &nbsp;<button @click="deleteData(student.student_id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
-                    </td>
+                  <tr v-for="grade in grades" :key="grade.id">
+                    <td>{{ grade.start_mark }} - {{ grade.end_mark }}</td>
+                    <td>{{ grade.grade_name }}</td>
+                    <td>{{ grade.grade_point }}</td>
+                    <td><router-link class="btn btn-info btn-sm" :to="{name: 'editgrade', params:{id:grade.id}}"><i class="fa fa-edit"></i></router-link></td>
                   </tr>
 
                   </tbody>
                 </table>
-                <h3 class="text-center" v-show="!studentAll.length > 0">No data found!</h3>
+                <h3 class="text-center" >No data found!</h3>
               </div>
               <!-- /.card-body -->
 
@@ -87,39 +68,21 @@
 
 
 export default {
-  name: "StudentList",
+  name: "GradeList",
   created() {
     this.authenticate();
     this.pageTitle();
-    this.getStudents();
+    this.getGrade();
   },
 
   data(){
     return {
-
-      studentAll: [],
-      checkBox: [],
+      grades: []
 
     }
   },
   computed: {
-    selectAll: {
-      get:function (){
-        return this.studentAll ? this.studentAll.length === this.checkBox.length : false
-      },
-      set: function (value){
 
-        let arrayValue = [];
-        if (value){
-          this.studentAll.forEach(student => {
-            arrayValue.push(student.student.id)
-          });
-        }
-
-        this.checkBox = arrayValue;
-
-      }
-    }
   },
   methods:{
     deleteAll(){
@@ -177,7 +140,7 @@ export default {
     },
 
     pageTitle(){
-      document.title = 'Student list'
+      document.title = 'Grade list'
     },
     authenticate(){
       if (!User.authenticate()){
@@ -186,15 +149,12 @@ export default {
       }
     },
 
-    getStudents(){
-      axios.get('/student').then(res => {
-
-        this.studentAll = res.data;
+    getGrade(){
+      axios.get('/grade').then(res => {
+        this.grades = res.data;
       })
     },
-    imagePath(path){
-      return '/'+path
-    }
+
 
   } // End Method
 }

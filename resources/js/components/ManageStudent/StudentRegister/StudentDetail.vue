@@ -112,7 +112,6 @@ export default {
     getByIdData(){
       axios.get('/student/'+this.$route.params.id).then(response => {
         this.student = response.data;
-        console.log(this.student)
       })
     },
 
