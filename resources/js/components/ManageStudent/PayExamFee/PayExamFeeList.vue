@@ -229,7 +229,7 @@ export default {
 
 
     validateData(){
-      if (this.search.year_id.length === 0 || this.search.class_id.length === 0){
+      if (this.search.year_id.length === 0 || this.search.class_id.length === 0 || this.search.exam_type_id === 0){
         Notification.error('Field must not be empty!')
         return true;
       }

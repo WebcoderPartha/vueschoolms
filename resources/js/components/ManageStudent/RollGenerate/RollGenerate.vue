@@ -186,12 +186,14 @@ export default {
       axios.get('/year').then(res => this.years = res.data)
     },
     SearchRollGenerate(){
-      axios.get('/searchrolgen/'+this.search.year_id+'/'+this.search.class_id)
-          .then(response => {
-            this.RollGenStudents = response.data;
+      if (!this.validateData()){
+        axios.get('/searchrolgen/'+this.search.year_id+'/'+this.search.class_id)
+            .then(response => {
+              this.RollGenStudents = response.data;
 
-          }).catch(error => {
-      })
+            }).catch(error => {
+        })
+      }
     },
     updateRoleGenerate(){
       let data = {
@@ -207,12 +209,12 @@ export default {
 
     },
 
-    // validateData(){
-    //   if (this.form.exam_type_id.length === 0 || this.add_class_id.length === 0 || this.add_amount.length === 0 || this.form.year_id.length === 0){
-    //     Notification.error('Field must not be empty!')
-    //     return true;
-    //   }
-    // }
+    validateData(){
+      if (this.search.year_id.length === 0 || this.search.class_id.length === 0){
+        Notification.error('Field must not be empty!')
+        return true;
+      }
+    }
 
   } // End Method
 }
