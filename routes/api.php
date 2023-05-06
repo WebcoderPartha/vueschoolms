@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\ManageStudent\RollGenerateController;
 use App\Http\Controllers\Api\ManageStudent\FeePayController;
 use App\Http\Controllers\Api\ManageMark\GradeManage\GradeController;
 use App\Http\Controllers\Api\ManageMark\MarkEntry\MarkController;
+use App\Http\Controllers\Api\Result\ResultController;
 
 
 
@@ -117,5 +118,8 @@ Route::middleware('jwtAuth')->group(function (){
     // Mark Entry  APIs
     Route::post('/getmarkstudent', [MarkController::class, 'SearchMarkStudent']);
     Route::post('/markstore', [MarkController::class, 'storeMark']);
+
+    // Results  APIs
+    Route::post('/searchresult', [ResultController::class, 'SearchAcademicTranscript']);
 
 });
