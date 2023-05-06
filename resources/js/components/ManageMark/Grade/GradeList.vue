@@ -45,7 +45,7 @@
 
                   </tbody>
                 </table>
-                <h3 class="text-center" >No data found!</h3>
+
               </div>
               <!-- /.card-body -->
 

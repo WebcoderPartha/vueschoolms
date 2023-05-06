@@ -282,6 +282,18 @@ const router = createRouter({
             component:()=> import('../components/ManageMark/Grade/GradeEdit.vue')
         },
 
+        // Result
+        {
+            path:  '/result/academic-transcript',
+            name: 'marksheet',
+            component:()=> import('../components/Result/MarkSheetGenerate.vue')
+        },
+        {
+            path:  '/result/search',
+            name: 'resutlsearch',
+            component:()=> import('../components/Result/ResultView.vue')
+        },
+
 
     ]
 

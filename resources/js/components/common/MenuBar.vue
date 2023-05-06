@@ -202,12 +202,33 @@
                   <p>Grade Manage</p>
                 </RouterLink>
               </li>
-
-
-
             </ul>
           </li>
 
+
+          <li class="nav-item" :class="(this.$route.path === '/result/academic-transcript') ? 'menu-open' : ''">
+            <a href="#" class="nav-link" :class="(this.$route.path === '/result/academic-transcript') ? 'active' : ''">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Results
+                <i class="right fas fa-angle-right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <RouterLink :to="{name:'marksheet'}"  :class="this.$route.path === '/result/academic-transcript' ? 'active' : ''" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Academic Transcript</p>
+                </RouterLink>
+              </li>
+              <li class="nav-item">
+                <RouterLink :to="{name:'resutlsearch'}"  :class="this.$route.path === '/result/search' ? 'active' : ''" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Result</p>
+                </RouterLink>
+              </li>
+            </ul>
+          </li>
 
         </ul>
       </nav>

@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\ManageStudent\RegisterStudentController;
 use App\Http\Controllers\Api\ManageStudent\RollGenerateController;
 use App\Http\Controllers\Api\ManageStudent\FeePayController;
 use App\Http\Controllers\Api\ManageMark\GradeManage\GradeController;
+use App\Http\Controllers\Api\ManageMark\MarkEntry\MarkController;
 
 
 
@@ -94,23 +95,27 @@ Route::middleware('jwtAuth')->group(function (){
     Route::apiResource('student', RegisterStudentController::class);
     Route::post('/student/alldel', [RegisterStudentController::class, 'allDelete']);
 
-    // RollGenerate
+    // RollGenerate APIs
     Route::get('/searchrolgen/{year}/{class}', [RollGenerateController::class, 'SearchYearClassRollGenStudent']);
     Route::put('/rollgenupdate', [RollGenerateController::class, 'updateRollGenerate']);
 
-    // Registration Fee Pay
+    // Registration Fee Pay APIs
     Route::post('/regifeepay', [FeePayController::class, 'SearchRegistrationFeePayStudent']);
     Route::get('/regifeepay/{year}/{class}/{student}', [FeePayController::class, 'getRegistrationPaySlipByID']);
 
-    // Monthly Fee Pay
+    // Monthly Fee Pay APIs
     Route::post('/monthlyfeepay', [FeePayController::class, 'SearchMonthlyFeePayStudent']);
     Route::get('/monthlyfeepay/{year}/{month}/{class}/{student}', [FeePayController::class, 'getMonthlyPaySlipByID']);
 
-    // Monthly Fee Pay
+    // Monthly Fee Pay APIs
     Route::post('/examfeepay', [FeePayController::class, 'SearchExamFeePayStudent']);
     Route::get('/examfeepay/{year}/{exam}/{class}/{student}', [FeePayController::class, 'getExamPaySlipByID']);
 
-    // Grade
+    // Grade APIs
     Route::apiResource('grade', GradeController::class);
+
+    // Mark Entry  APIs
+    Route::post('/getmarkstudent', [MarkController::class, 'SearchMarkStudent']);
+    Route::post('/markstore', [MarkController::class, 'storeMark']);
 
 });
