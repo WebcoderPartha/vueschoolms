@@ -105,5 +105,9 @@ Route::middleware('jwtAuth')->group(function (){
     Route::post('/monthlyfeepay', [FeePayController::class, 'SearchMonthlyFeePayStudent']);
     Route::get('/monthlyfeepay/{year}/{month}/{class}/{student}', [FeePayController::class, 'getMonthlyPaySlipByID']);
 
+    // Monthly Fee Pay
+    Route::post('/examfeepay', [FeePayController::class, 'SearchExamFeePayStudent']);
+    Route::get('/examfeepay/{year}/{exam}/{class}/{student}', [FeePayController::class, 'getExamPaySlipByID']);
+
 
 });
