@@ -50,7 +50,7 @@ class MarkController extends Controller
                     'student_id' => $value['student_id'],
                     'exam_type_id' => $value['exam_type_id'],
                     'grade_point' => $point->grade_point,
-//                    'grade_point' => 1,
+                    'letter_grade' => $point->grade_name,
                     'mark' => $value['mark'],
                 ]);
             }else{
@@ -70,7 +70,7 @@ class MarkController extends Controller
                     'student_id' => $value['student_id'],
                     'exam_type_id' => $value['exam_type_id'],
                     'grade_point' => $point->grade_point,
-//                    'grade_point' => 1,
+                    'letter_grade' => $point->grade_name,
                     'mark' => $value['mark'],
                 ]);
             }

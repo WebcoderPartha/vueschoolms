@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('subject_id');
             $table->string('mark');
             $table->string('grade_point');
+            $table->string('letter_grade');
             $table->timestamps();
         });
     }

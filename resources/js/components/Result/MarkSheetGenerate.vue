@@ -190,7 +190,7 @@
                     <td class="cent-align">{{ index+1 }}</td>
                     <td class="cent-align">{{ mark.subject.name }}</td>
                     <td class="cent-align">{{ mark.mark }}</td>
-                    <td class="cent-align">A+</td>
+                    <td class="cent-align">{{ mark.letter_grade }}</td>
 
                     <td class="cent-align">{{ mark.grade_point }}</td>
                   </tr>
