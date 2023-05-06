@@ -144,7 +144,7 @@
 
 
 export default {
-  name: "PayMonthlyFeeList",
+  name: "PayExamFeeList",
   created() {
     this.authenticate();
     this.pageTitle();
@@ -176,7 +176,7 @@ export default {
   methods:{
 
     pageTitle(){
-      document.title = 'Pay Monthly Fee'
+      document.title = 'Pay Exam Fee'
     },
     authenticate(){
       if (!User.authenticate()){
