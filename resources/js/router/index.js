@@ -245,6 +245,18 @@ const router = createRouter({
             component:()=> import('../components/ManageStudent/PayMonthlyFee/MonthlyFeePaySlip.vue')
         },
 
+        // Exam Fee Fee
+        {
+            path:  '/pay/exam/fee',
+            name: 'payexamfee',
+            component:()=> import('../components/ManageStudent/PayExamFee/PayExamFeeList.vue')
+        },
+        {
+            path:  '/pay/exam/fee/:year/:exam/:class/:student/slip',
+            name: 'payexamfeeslip',
+            component:()=> import('../components/ManageStudent/PayExamFee/PayExamFeeSlip.vue')
+        },
+
 
     ]
 
