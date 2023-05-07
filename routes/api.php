@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\ManageStudent\FeePayController;
 use App\Http\Controllers\Api\ManageMark\GradeManage\GradeController;
 use App\Http\Controllers\Api\ManageMark\MarkEntry\MarkController;
 use App\Http\Controllers\Api\Result\ResultController;
+use App\Http\Controllers\Api\ManageEmployee\DesignationController;
 
 
 
@@ -123,5 +124,10 @@ Route::middleware('jwtAuth')->group(function (){
     Route::post('/searchresult', [ResultController::class, 'SearchAcademicTranscript']);
     Route::post('/resultall', [ResultController::class, 'ResultSearch']);
     Route::get('/getmarks/{year}/{class}/{exam_type_id}/{student}', [ResultController::class, 'getStudentResult']);
+
+
+    // Designation APIs
+    Route::apiResource('designation', DesignationController::class);
+
 
 });

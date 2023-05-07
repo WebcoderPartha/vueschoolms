@@ -230,6 +230,25 @@
             </ul>
           </li>
 
+          <li class="nav-item" :class="(this.$route.path === '/manage/employee/designation/list') ? 'menu-open' : ''">
+            <a href="#" class="nav-link" :class="(this.$route.path === '/manage/employee/designation/list') ? 'active' : ''">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Manage Employee
+                <i class="right fas fa-angle-right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <RouterLink :to="{name:'designation'}"  :class="this.$route.path === '/manage/employee/designation/list' ? 'active' : ''" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Designation</p>
+                </RouterLink>
+              </li>
+
+            </ul>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
