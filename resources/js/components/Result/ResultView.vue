@@ -91,7 +91,7 @@
       </div><!--/. container-fluid -->
     </section>
 
-    <section class="content">
+    <section class="content" v-if="results.length > 0">
       <div class="container-fluid">
 
         <div class="card">
@@ -102,9 +102,9 @@
             <div class="row">
               <div class="col-md-8">
                 <span class="result" v-for="result in results">
-                  {{result.id_number}} : <b v-for="fail in fails">
+                  {{result.id_number}} : ( <b v-for="fail in fails">
                   <span v-if="fail.student_id === result.student_id">F</span>
-                  <span v-else>{{result.gpa}}</span>
+                  <span v-else>{{result.gpa}}</span> )
                 </b>
                 </span>
               </div>

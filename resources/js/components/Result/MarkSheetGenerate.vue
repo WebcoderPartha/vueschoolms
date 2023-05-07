@@ -98,7 +98,7 @@
       </div><!--/. container-fluid -->
     </section>
 
-    <section class="content">
+    <section class="content" v-if="marks.length > 0">
       <div class="container-fluid">
 
         <div class="card">
