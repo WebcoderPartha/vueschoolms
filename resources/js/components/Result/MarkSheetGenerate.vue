@@ -268,7 +268,7 @@ export default {
   methods:{
 
     pageTitle(){
-      document.title = 'Pay Monthly Fee'
+      document.title = 'Academic Transcript'
     },
     authenticate(){
       if (!User.authenticate()){

@@ -121,5 +121,7 @@ Route::middleware('jwtAuth')->group(function (){
 
     // Results  APIs
     Route::post('/searchresult', [ResultController::class, 'SearchAcademicTranscript']);
+    Route::post('/resultall', [ResultController::class, 'ResultSearch']);
+    Route::get('/getmarks/{year}/{class}/{exam_type_id}/{student}', [ResultController::class, 'getStudentResult']);
 
 });
