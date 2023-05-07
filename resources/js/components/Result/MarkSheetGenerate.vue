@@ -143,7 +143,8 @@
                   </tr>
                   <tr>
                     <td>Result</td>
-                    <td>CGPA = <b>{{gradePoint}}</b></td>
+                    <td v-if="fail !== 'Fail'">CGPA = <b>{{gradePoint}}</b></td>
+                    <td v-else>CGPA = <b>Fail</b></td>
                     <td>Date of Birth</td>
                     <td>{{ student.date_of_birth}}</td>
                   </tr>
@@ -198,7 +199,8 @@
                   <tr>
                     <td colspan="4" style="border-bottom: none !important;"></td>
 
-                    <td><b>CGPA: {{ gradePoint }}</b></td>
+                    <td v-if="fail !== 'Fail'"><b>CGPA: {{ gradePoint }}</b></td>
+                    <td v-else><b>CGPA: 00</b></td>
                   </tr>
 
 
@@ -253,6 +255,7 @@ export default {
       grades: [],
       gradePoint: '',
       marks: [],
+      fail: '',
 
 
       years: [],
@@ -293,6 +296,7 @@ export default {
           this.group_name = this.assign_student.group.name
           this.session = this.assign_student.year.name
           this.grades = response.data.grade
+          this.fail = response.data.fails
 
           // CGPA Point
           let totalGradePoint = 0;
@@ -300,7 +304,7 @@ export default {
             totalGradePoint += parseFloat(item.grade_point)
           })
           let subjectCount = response.data.marks.length;
-          this.gradePoint = totalGradePoint / subjectCount
+          this.gradePoint = parseFloat(totalGradePoint / subjectCount).toFixed(2)
           // End CGPA Point
 
           this.marks = response.data.marks

@@ -38,7 +38,16 @@ class ResultController extends Controller
             return response()->json($data);
 
         }else{
-            return response()->json('Fail');
+
+            $data['marks'] = Mark::with('subject')->where([
+                'year_id' => $request->year_id,
+                'class_id' => $request->class_id,
+                'exam_type_id' => $request->exam_type_id,
+                'student_id' => $data['student']->id,
+            ])->get();
+            $data['fails'] = 'Fail';
+            return response()->json($data);
+
         }
 
 
