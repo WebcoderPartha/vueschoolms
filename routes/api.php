@@ -128,7 +128,7 @@ Route::middleware('jwtAuth')->group(function (){
 
     // Designation APIs
     Route::apiResource('designation', DesignationController::class);
-//    Route::post('/resultall', [ResultController::class, 'ResultSearch']);
+    Route::post('/designation/alldel', [DesignationController::class, 'allDelete']);
 
 
 });

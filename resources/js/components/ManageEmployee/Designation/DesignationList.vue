@@ -163,15 +163,32 @@ export default {
   methods:{
 
     deleteAll(){
-      // let data = {
-      //   checkBox: this.checkBox
-      // }
-      // axios.post('/designation/alldel', data).then(res => {
-      //   this.getClass();
-      //   this.checkBox = []
-      //   this.$router.push({name:'classes'})
-      //   Notification.success(res.data);
-      // })
+
+      Swal.fire({
+        title: 'Are you sure?',
+        // text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let data = {
+            checkBox: this.checkBox
+          }
+          axios.post('/designation/alldel', data).then(res => {
+            this.getDesignation();
+            this.checkBox = []
+            Notification.success(res.data);
+          })
+          Swal.fire(
+              'Deleted!',
+              // 'Your file has been deleted.'+ id,
+              'success'
+          )
+        }
+      })
     },
     deleteData(id){
       Swal.fire({
@@ -236,17 +253,19 @@ export default {
       this.form.names.splice(index, 1);
     },
     storeData(){
-      axios.post('/designation', this.form).then(response => {
-        // console.log(response.data);
-        if (!this.validationDta()){
+      if (!this.validationDta()){
+        axios.post('/designation', this.form).then(response => {
+          // console.log(response.data);
           this.$refs.form.reset();
           this.getDesignation();
           this.form.names = [{name: ''}]
           Notification.success(response.data)
-        }
-      }).catch(error => {
 
-      })
+        }).catch(error => {
+
+        })
+      }
+
     },
     validationDta(){
       // this.form.names.forEach(item=> {

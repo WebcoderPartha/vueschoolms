@@ -68,4 +68,12 @@ class DesignationController extends Controller
         return Response::json('Deleted successfully!', 200);
 
     }
+
+    public function allDelete(Request $request){
+        for ($i = 0; $i < count($request->checkBox); $i++){
+            Designation::where('id', $request->checkBox[$i])->delete();
+        }
+
+        return Response::json('Deleted successfully!', 200);
+    }
 }
