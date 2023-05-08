@@ -31,9 +31,12 @@
                   <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Year</th>
-                    <th>Class</th>
-                    <th>Roll</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Joining Date</th>
+                    <th>Designation</th>
+                    <th>Salary</th>
                     <th>Image</th>
                     <th><input type="checkbox" v-model="selectAll"> Select All
                       <button class="btn btn-sm btn-danger" @click="deleteAll" v-show="checkBox.length > 0"><i class="fa fa-trash-alt"></i></button>
