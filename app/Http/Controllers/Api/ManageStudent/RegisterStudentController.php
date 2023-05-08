@@ -130,7 +130,7 @@ class RegisterStudentController extends Controller
             $sub = substr($request->new_image, 0, $position);
             $extension = explode('/', $sub)[1];
 
-            $photo = time().'-customer'.'.'.$extension;
+            $photo = time().'-student'.'.'.$extension;
             $directory = 'uploads/student/';
 
             Image::make($request->new_image)->resize(300, 300)->save(public_path($directory.$photo));
