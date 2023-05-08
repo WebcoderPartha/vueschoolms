@@ -307,6 +307,24 @@ const router = createRouter({
             component:()=> import('../components/ManageEmployee/Designation/EditDesignation.vue')
         },
 
+        // Employee
+        {
+            path:  '/manage/employee/list',
+            name: 'employee',
+            component:()=> import('../components/ManageEmployee/Employee/EmployeeList.vue')
+        },
+
+        {
+            path:  '/manage/employee/edit/:id',
+            name: 'editemployee',
+            component:()=> import('../components/ManageEmployee/Employee/EditEmployee.vue')
+        },
+        {
+            path:  '/manage/employee/add',
+            name: 'addemployee',
+            component:()=> import('../components/ManageEmployee/Employee/AddEmployee.vue')
+        },
+
 
     ]
 

@@ -176,4 +176,27 @@ class EmployeeController extends Controller
         $employee->delete();
         return Response::json('Employee deleted successfully');
     }
+
+
+    public function deleteAll(Request $request){
+
+        for ($i=0;$i < count($request->checkBox); $i++){
+
+            $employee = Employee::find($request->checkBox[$i]);
+
+            if ($employee->image !== null){
+                if (file_exists(public_path($employee->image))){
+                    unlink(public_path($employee->image));
+                    $employee->delete();
+
+                }else{
+                    $employee->delete();
+                }
+            }
+
+
+        }
+
+    }
+
 }

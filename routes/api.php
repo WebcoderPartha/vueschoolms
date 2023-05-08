@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\ManageMark\GradeManage\GradeController;
 use App\Http\Controllers\Api\ManageMark\MarkEntry\MarkController;
 use App\Http\Controllers\Api\Result\ResultController;
 use App\Http\Controllers\Api\ManageEmployee\DesignationController;
+use App\Http\Controllers\Api\ManageEmployee\EmployeeController;
 
 
 
@@ -129,6 +130,10 @@ Route::middleware('jwtAuth')->group(function (){
     // Designation APIs
     Route::apiResource('designation', DesignationController::class);
     Route::post('/designation/alldel', [DesignationController::class, 'allDelete']);
+
+    // Designation APIs
+    Route::apiResource('employee', EmployeeController::class);
+    Route::post('employee/alldel', [EmployeeController::class, 'deleteAll']);
 
 
 });

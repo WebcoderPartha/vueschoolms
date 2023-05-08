@@ -246,6 +246,13 @@
                 </RouterLink>
               </li>
 
+              <li class="nav-item">
+                <RouterLink :to="{name:'employee'}"  :class="this.$route.path === '/manage/employee/list' ? 'active' : ''" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Employee</p>
+                </RouterLink>
+              </li>
+
             </ul>
           </li>
 
