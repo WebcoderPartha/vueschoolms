@@ -48,7 +48,7 @@
 
                     </td>
                     <td>
-                      <RouterLink :to="{name:'edit_class', params:{id:designation.id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>
+                      <RouterLink :to="{name:'designationedit', params:{id:designation.id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>
                       &nbsp;<button @click="deleteData(designation.id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
                     </td>
                   </tr>
