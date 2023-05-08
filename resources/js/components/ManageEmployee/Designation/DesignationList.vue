@@ -38,18 +38,18 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr v-for="(cls, index) in classes" :key="cls.id">
+                  <tr v-for="(designation, index) in designations" :key="designation.id">
                     <td>{{ index + 1 }}</td>
-                    <td>{{ cls.name }}</td>
+                    <td>{{ designation.name }}</td>
                     <td>
 
-                      <input type="checkbox" :value="cls.id" v-model="checkBox">
+                      <input type="checkbox" :value="designation.id" v-model="checkBox">
 
 
                     </td>
                     <td>
-                      <RouterLink :to="{name:'edit_class', params:{id:cls.id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>
-                      &nbsp;<button @click="deleteData(cls.id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
+                      <RouterLink :to="{name:'edit_class', params:{id:designation.id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>
+                      &nbsp;<button @click="deleteData(designation.id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
                     </td>
                   </tr>
 
@@ -79,22 +79,30 @@
               </div>
               <div class="card-body">
                 <form @submit.prevent="storeData" ref="form">
-                  <div class="row" v-for="(names, index) in form.names" :key="index">
+<!--                  <div class="row" v-for="(names, index) in form.names" :key="index">-->
+                  <div class="row" v-for="(value, index) in form.names" :key="index">
                     <div class="col-md-10">
                       <div class="input-group mb-3">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Designation name</span>
                         </div>
-                        <input type="text"  v-model="names.name" class="form-control" placeholder="Name">
+                        <input type="text"  v-model="value.name" class="form-control" placeholder="Name">
                       </div>
                     </div>
                     <div class="col-md-2">
                       <button class="btn btn-sm btn-primary" @click.prevent="addItem">+</button> &nbsp;
                       <button class="btn btn-sm btn-danger" @click.prevent="removeItem(index)" v-if="index > 0">-</button>
 
+
                     </div>
                   </div>
 
+<!--                  <table>-->
+<!--                    <tr v-for="(name, index) in this.form.names" :key="index">-->
+<!--                      <td>{{ name.name}}</td>-->
+<!--                      <td><button class="btn btn-sm btn-danger" @click.prevent="removeItem(index)" v-if="index > 0">-</button></td>-->
+<!--                    </tr>-->
+<!--                  </table>-->
                   <button type="submit" class="btn btn-primary">Store Data</button>
                 </form>
               </div>
@@ -128,6 +136,7 @@ export default {
       form: {
         names: [{name: ''}]
       },
+      addName: [],
       checkBox: [],
       designations: [],
     }
@@ -191,22 +200,21 @@ export default {
     addItem(){
 
       if (!this.validationDta()){
-        this.form.names.push({name: ''})
+
+        let item = this.form.names.find(item => item.name === this.addName);
+        if (!item){
+          this.form.names.push({name: this.addName})
+
+        }else{
+          Notification.error('Duplicate')
+        }
+
+        this.form.names = [...new Map(this.form.names.map(item=> [item['name'],item])).values()]
+        // this.addName = ''
+        console.log(this.form.names)
+
       }
 
-      // if (this.form.d.length !== 0){
-      //
-      //   // this.form.name.push(this.form.class_name)
-      //   // if (this.form.name.indexOf(this.form.class_name) !== this.form.name.lastIndexOf(this.form.class_name)){
-      //   //
-      //   //   Notification.error('Duplicate category not allowed!')
-      //   // }
-      //   // this.form.name = [...new Set(this.form.name)]
-      //   // this.form.class_name = ''
-      //
-      // }else{
-      //   Notification.error('Field must not be empty!')
-      // }
 
     },
     pageTitle(){
@@ -230,10 +238,12 @@ export default {
     storeData(){
       axios.post('/designation', this.form).then(response => {
         // console.log(response.data);
-
-        this.$refs.form.reset();
-        this.getDesignation();
-        Notification.success(response.data)
+        if (!this.validationDta()){
+          this.$refs.form.reset();
+          this.getDesignation();
+          this.form.names = [{name: ''}]
+          Notification.success(response.data)
+        }
       }).catch(error => {
 
       })
@@ -251,6 +261,11 @@ export default {
           return true;
         }
       }
+
+      // if (this.addName.length === 0){
+      //   Notification.error('Field must not be empty!');
+      //   return true;
+      // }
     }
 
   } // End Method
