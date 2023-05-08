@@ -42,7 +42,7 @@ class EmployeeController extends Controller
             $sub = substr($request->image, 0, $position);
             $extension = explode('/', $sub)[1];
 
-            $photo = time().'-student'.'.'.$extension;
+            $photo = time().'-employee'.'.'.$extension;
             $directory = 'uploads/employee/';
 
             Image::make($request->image)->resize(300, 300)->save(public_path($directory.$photo));
