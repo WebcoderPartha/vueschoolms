@@ -252,6 +252,12 @@
                   <p>Employee</p>
                 </RouterLink>
               </li>
+              <li class="nav-item">
+                <RouterLink :to="{name:'salary'}"  :class="this.$route.path === '/manage/employee/salaries' ? 'active' : ''" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Employee Salary</p>
+                </RouterLink>
+              </li>
 
             </ul>
           </li>

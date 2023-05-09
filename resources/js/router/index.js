@@ -325,6 +325,18 @@ const router = createRouter({
             component:()=> import('../components/ManageEmployee/Employee/AddEmployee.vue')
         },
 
+        // Employee Salary
+        {
+            path:  '/manage/employee/salaries',
+            name: 'salary',
+            component:()=> import('../components/ManageEmployee/EmployeeSalary/EmployeeSalaryList.vue')
+        },
+        {
+            path:  '/manage/employee/:id/salary/increment',
+            name: 'salaryincrement',
+            component:()=> import('../components/ManageEmployee/EmployeeSalary/SalaryIncrement.vue')
+        },
+
 
     ]
 
