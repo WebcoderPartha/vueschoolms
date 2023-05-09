@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\ManageMark\MarkEntry\MarkController;
 use App\Http\Controllers\Api\Result\ResultController;
 use App\Http\Controllers\Api\ManageEmployee\DesignationController;
 use App\Http\Controllers\Api\ManageEmployee\EmployeeController;
+use App\Http\Controllers\Api\ManageEmployee\EmployeeSalaryController;
 
 
 
@@ -133,7 +134,10 @@ Route::middleware('jwtAuth')->group(function (){
 
     // Designation APIs
     Route::apiResource('employee', EmployeeController::class);
-    Route::post('employee/alldel', [EmployeeController::class, 'deleteAll']);
+    Route::post('/employee/alldel', [EmployeeController::class, 'deleteAll']);
+
+    // Employee Salary
+    Route::post('/incmentsalary/{id}', [EmployeeSalaryController::class, 'increment']);
 
 
 });

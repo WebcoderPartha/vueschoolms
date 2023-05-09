@@ -31,34 +31,23 @@
                   <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Year</th>
-                    <th>Class</th>
-                    <th>Roll</th>
-                    <th>Image</th>
-                    <th><input type="checkbox" v-model="selectAll"> Select All
-                      <button class="btn btn-sm btn-danger" @click="deleteAll" v-show="checkBox.length > 0"><i class="fa fa-trash-alt"></i></button>
-                    </th>
+                    <th>Joining Date</th>
+                    <th>Salary</th>
+
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr v-for="(salary, index) in salaries" :key="index+1">
-                    <td>{{ salary.employee.id_number }}</td>
-                    <td>{{ salary.employee.name }}</td>
-                    <td>{{ salary.previous_salary }}</td>
-                    <td>{{ salary.present_salary }}</td>
-                    <td>{{ salary.inrement_salary }}</td>
-                    <td>{{ salary.inrement_salary_date }}</td>
+                    <td>{{ salary.id_number }}</td>
+                    <td>{{ salary.name }}</td>
+                    <td>{{ salary.joining_date }}</td>
+                    <td>{{ salary.salary }}</td>
+
                     <td>
-
-                      <input type="checkbox" :value="student.student_id" v-model="checkBox">
-
-
-                    </td>
-                    <td>
-                      <RouterLink :to="{name: 'salaryincrement', params:{id:salary.employee_id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>&nbsp;
+                      <RouterLink :to="{name: 'salaryincrement', params:{id:salary.id}}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Increment</RouterLink>&nbsp;
 <!--                      <RouterLink :to="{name: 'studentdetail', params:{id:student.student_id}}" class="badge bg-primary"><i class="fa fa-eye"></i></RouterLink>-->
-                      &nbsp;<button @click="deleteData(salary.id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
+                      &nbsp;<button  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
                     </td>
                   </tr>
 
@@ -103,78 +92,9 @@ export default {
     }
   },
   computed: {
-    selectAll: {
-      get:function (){
-        return this.salaries ? this.salaries.length === this.checkBox.length : false
-      },
-      set: function (value){
-
-        let arrayValue = [];
-        if (value){
-          this.salaries.forEach(salary => {
-            arrayValue.push(salary.id)
-          });
-        }
-
-        this.checkBox = arrayValue;
-
-      }
-    }
   },
   methods:{
-    deleteAll(){
 
-      Swal.fire({
-        title: 'Are you sure?',
-        // text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          let data = {
-            checkBox: this.checkBox
-          }
-          axios.post('/salary/alldel', data).then(res => {
-            this.getSalary();
-            this.checkBox = []
-            Notification.success(res.data);
-          })
-          Swal.fire(
-              'Deleted!',
-              // 'Your file has been deleted.'+ id,
-              'success'
-          )
-        }
-      })
-
-    },
-
-    deleteData(id){
-
-      Swal.fire({
-        title: 'Are you sure?',
-        // text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          axios.delete('/salary/'+id).then(res => {
-            this.getSalary()
-          })
-          Swal.fire(
-              'Deleted!',
-              // 'Your file has been deleted.'+ id,
-              'success'
-          )
-        }
-      })
-    },
 
     pageTitle(){
       document.title = 'Salary list'
@@ -187,7 +107,7 @@ export default {
     },
 
     getSalary(){
-      axios.get('/salary').then(res => {
+      axios.get('/employee').then(res => {
 
         this.salaries = res.data;
       })
