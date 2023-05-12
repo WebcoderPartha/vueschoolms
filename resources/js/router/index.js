@@ -337,6 +337,23 @@ const router = createRouter({
             component:()=> import('../components/ManageEmployee/EmployeeSalary/SalaryIncrement.vue')
         },
 
+        // Leave
+        {
+            path:  '/manage/employee/leave',
+            name: 'leave',
+            component:()=> import('../components/ManageEmployee/Leave/LeaveList.vue')
+        },
+        {
+            path:  '/manage/employee/leave/:id/edit',
+            name: 'editleave',
+            component:()=> import('../components/ManageEmployee/Leave/LeaveEdit.vue')
+        },
+        {
+            path:  '/manage/employee/leave/add',
+            name: 'addleave',
+            component:()=> import('../components/ManageEmployee/Leave/LeaveAdd.vue')
+        },
+
 
     ]
 

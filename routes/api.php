@@ -23,6 +23,8 @@ use App\Http\Controllers\Api\Result\ResultController;
 use App\Http\Controllers\Api\ManageEmployee\DesignationController;
 use App\Http\Controllers\Api\ManageEmployee\EmployeeController;
 use App\Http\Controllers\Api\ManageEmployee\EmployeeSalaryController;
+use App\Http\Controllers\Api\ManageEmployee\LeaveController;
+use App\Http\Controllers\Api\ManageEmployee\LeavePurposeController;
 
 
 
@@ -138,6 +140,12 @@ Route::middleware('jwtAuth')->group(function (){
 
     // Employee Salary
     Route::post('/incmentsalary/{id}', [EmployeeSalaryController::class, 'increment']);
+
+    // Leave APIs
+    Route::apiResource('leave', LeaveController::class);
+
+    // Leave Purpose
+    Route::get('/leavepurpose', [LeavePurposeController::class, 'index']);
 
 
 });
