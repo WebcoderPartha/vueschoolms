@@ -143,6 +143,7 @@ Route::middleware('jwtAuth')->group(function (){
 
     // Leave APIs
     Route::apiResource('leave', LeaveController::class);
+    Route::post('/leave/delall', [LeaveController::class, 'deleteAll']);
 
     // Leave Purpose
     Route::get('/leavepurpose', [LeavePurposeController::class, 'index']);

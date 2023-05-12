@@ -134,7 +134,7 @@ export default {
           let data = {
             checkBox: this.checkBox
           }
-          axios.post('/examfee/alldel', data).then(res => {
+          axios.post('/leave/delall', data).then(res => {
             this.getLeave();
             this.checkBox = []
             Notification.success(res.data);

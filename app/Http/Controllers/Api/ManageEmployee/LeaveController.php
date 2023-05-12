@@ -108,6 +108,22 @@ class LeaveController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Leave::find($id)->delete();
+        return Response::json('Employee leave deleted');
     }
+
+    public function deleteAll(Request $request){
+
+        foreach ($request->checkBox as $value){
+
+            Leave::where('id', $value)->delete();
+
+        }
+
+
+        return Response::json('Employee leave deleted');
+
+
+    }
+
 }
