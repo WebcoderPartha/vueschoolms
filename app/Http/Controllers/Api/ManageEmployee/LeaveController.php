@@ -51,6 +51,9 @@ class LeaveController extends Controller
 
         }
 
+
+        return Response::json('Employee leave added!');
+
     }
 
     /**
@@ -58,23 +61,46 @@ class LeaveController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Leave::find($id);
+        return Response::json($data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+
+
+        if ($request->leave_purpose_id === 'new_purpose'){
+
+            $leavePurpose = LeavePurpose::create([
+                'leave_purpose' => $request->add_new_purpose
+            ]);
+
+            $leave = Leave::where('id', $id)->update([
+                'employee_id' => $request->employee_id,
+                'leave_purpose_id' => $leavePurpose->id,
+                'leave_start_date' => date('Y-m-d', strtotime($request->leave_start_date)),
+                'leave_end_date' => date('Y-m-d', strtotime($request->leave_end_date))
+            ]);
+
+
+        }else{
+
+            $leave = Leave::where('id', $id)->update([
+                'employee_id' => $request->employee_id,
+                'leave_purpose_id' => $request->leave_purpose_id,
+                'leave_start_date' => date('Y-m-d', strtotime($request->leave_start_date)),
+                'leave_end_date' => date('Y-m-d', strtotime($request->leave_end_date))
+            ]);
+
+        }
+
+        return Response::json('Employee leave updated!');
+
+
     }
 
     /**
