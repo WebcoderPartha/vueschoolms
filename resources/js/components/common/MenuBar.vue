@@ -264,6 +264,12 @@
                   <p>Leave</p>
                 </RouterLink>
               </li>
+              <li class="nav-item">
+                <RouterLink :to="{name:'attendance'}"  :class="this.$route.path === '/manage/employee/attendance' ? 'active' : ''" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Attendance</p>
+                </RouterLink>
+              </li>
 
             </ul>
           </li>

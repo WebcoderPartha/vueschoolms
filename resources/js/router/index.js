@@ -355,6 +355,29 @@ const router = createRouter({
         },
 
 
+        // Leave
+        {
+            path:  '/manage/employee/attendance',
+            name: 'attendance',
+            component:()=> import('../components/ManageEmployee/Attendance/AttendanceList.vue')
+        },
+        {
+            path:  '/manage/employee/attendance/:id/edit',
+            name: 'editattendance',
+            component:()=> import('../components/ManageEmployee/Attendance/AttendanceEdit.vue')
+        },
+        {
+            path:  '/manage/employee/attendance/add',
+            name: 'addattendance',
+            component:()=> import('../components/ManageEmployee/Attendance/AttendanceAdd.vue')
+        },
+        {
+            path:  '/manage/employee/attendance/:id/detail',
+            name: 'detailattendance',
+            component:()=> import('../components/ManageEmployee/Attendance/AttendanceDetail.vue')
+        },
+
+
     ]
 
 });

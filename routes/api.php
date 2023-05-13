@@ -25,6 +25,7 @@ use App\Http\Controllers\Api\ManageEmployee\EmployeeController;
 use App\Http\Controllers\Api\ManageEmployee\EmployeeSalaryController;
 use App\Http\Controllers\Api\ManageEmployee\LeaveController;
 use App\Http\Controllers\Api\ManageEmployee\LeavePurposeController;
+use App\Http\Controllers\Api\ManageEmployee\AttendanceController;
 
 
 
@@ -147,6 +148,10 @@ Route::middleware('jwtAuth')->group(function (){
 
     // Leave Purpose
     Route::get('/leavepurpose', [LeavePurposeController::class, 'index']);
+
+    // Attendance APIs
+    Route::apiResource('attendance', AttendanceController::class);
+    Route::post('/attendance/delall', [AttendanceController::class, 'deleteAll']);
 
 
 });
