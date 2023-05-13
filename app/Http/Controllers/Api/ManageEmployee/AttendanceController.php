@@ -22,7 +22,16 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        for ($i = 0; $i < count($request->form); $i++){
+            Attendance::create([
+                'employee_id' => $request->form[$i]['employee_id'],
+                'attendance_status' => $request->form[$i]['attendance_status'],
+                'attendance_date' => date('Y-m-d', strtotime($request->form[$i]['attendance_date'])),
+            ]);
+        }
+
+        return Response::json('Attendance store successfully!');
+
     }
 
     /**

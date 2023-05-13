@@ -18,7 +18,7 @@
     <section class="content">
       <div class="container-fluid">
         <!-- Info boxes -->
-        <form >
+        <form  @submit.prevent="storeData" ref="cleardata">
           <div class="row">
           <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
@@ -128,10 +128,11 @@ export default {
   },
   methods:{
 
-    currentDate(){
-      let date = document.getElementById('ok');
-      date.value = new Date().getUTCFullYear()
-    },
+    // currentDate(){
+    //   let date = document.getElementById('ok');
+    //   date.value = new Date().getUTCFullYear()
+    // },
+
     AttendantEvent(e){
       if (!this.validateDate()){
         let data = {
@@ -139,13 +140,35 @@ export default {
           attendance_status: e.target.value,
           attendance_date: e.target.getAttribute('data-attendance-date')
         }
+
         this.form.push(data)
+
+        // Unique Object Array
         this.form = [...new Map(this.form.map(item=> [item['employee_id'],item])).values()]
-        console.log(this.form)
 
       }
     },
+    storeData(){
+      if (this.form.length > 0){
+        let data = {
+          form: this.form
+        }
 
+        axios.post('/attendance',data).then(response => {
+
+          this.$refs.cleardata.reset()
+          this.$router.push({name: 'attendance'})
+          Notification.success(response.data)
+
+        }).catch(error => {
+
+        })
+
+        console.log(data)
+      }else{
+        Notification.error('Field must not be empty!')
+      }
+    },
     getEmployee(){
       axios.get('/employee').then(res => {
         this.employees = res.data
@@ -167,14 +190,14 @@ export default {
 
         Notification.error('Select date first!');
 
-        for(let i = 0; i<document.getElementsByClassName("checkbox").length; i++){
+        for(let i = 0; i < document.getElementsByClassName("checkbox").length; i++){
 
           document.getElementsByClassName('checkbox')[i].checked = false;
 
         }
-
         return true
       }
+
     }
 
   } // End Method
