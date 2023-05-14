@@ -30,7 +30,7 @@
                 <hr>
                 <div class="form-group col-4 mx-auto ">
                   <label for="date"> <b>Attendance Date</b></label>
-                  <input type="date" name="date" id="date" v-model="attendance_date" class="form-control">\
+                  <input type="date" name="date" id="date" v-model="attendance_date" class="form-control">
                 </div>
               </div>
               <div class="card-body">
@@ -164,7 +164,6 @@ export default {
 
         })
 
-        console.log(data)
       }else{
         Notification.error('Field must not be empty!')
       }

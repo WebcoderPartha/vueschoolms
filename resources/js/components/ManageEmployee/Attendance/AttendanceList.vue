@@ -40,16 +40,16 @@
                   <tbody>
                   <tr v-for="(attendance, index) in attendances" :key="attendance.id">
                     <td>{{ index + 1 }}</td>
-                    <td>{{ attendance.employee.name }}</td>
+                    <td>{{ getDateFormat(attendance.attendance_date) }}</td>
                     <td>
 
-                      <input type="checkbox" :value="attendance.id" v-model="selected">
+                      <input type="checkbox" :value="attendance.attendance_date" v-model="selected">
 
 
                     </td>
                     <td>
-                      <RouterLink :to="{name:'editattendance', params:{id:attendance.id}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>
-                      &nbsp;<button @click="deleteData(shift.id)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
+                      <RouterLink :to="{name:'editattendance', params:{id:attendance.attendance_date}}" class="badge bg-info"><i class="fa fa-edit"></i></RouterLink>
+                      &nbsp;<button @click="deleteData(attendance.attendance_date)"  class="badge bg-danger"><i class="fa fa-trash-alt"></i></button>
                     </td>
                   </tr>
 
@@ -185,9 +185,17 @@ export default {
     getAttendance(){
       axios.get('/attendance').then(res => {
         this.attendances = res.data
+        console.log(res.data)
       })
     },
 
+    getDateFormat(date){
+
+      const getDate = new Date(date)
+
+      return moment(getDate).format('D MMM, YYYY')
+
+    }
 
   } // End Method
 }

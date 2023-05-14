@@ -15,6 +15,7 @@
         "vue": "^3.2.37"
     },
     "dependencies": {
+        "moment": "^2.29.4",
         "sweetalert2": "^11.7.3",
         "vue-router": "^4.1.6"
     }

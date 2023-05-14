@@ -12,7 +12,7 @@ class AttendanceController extends Controller
 
     public function index()
     {
-        $data = Attendance::with('employee')->get();
+        $data = Attendance::select('attendance_date')->groupBy('attendance_date')->get();
         return Response::json($data);
     }
 

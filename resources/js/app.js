@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import Notification from "./helpers/Notification";
 import axios from "axios";
 import User from "./helpers/User";
+import moment from 'moment'
 
 // Sweet Alert
 const Toast = Swal.mixin({
@@ -33,6 +34,10 @@ window.Toast = Toast
 window.Notification = Notification;
 // End Sweet Alert
 window.User = User
+
+// Moment
+window.moment = moment
+
 
 const app = createApp(Main);
 
