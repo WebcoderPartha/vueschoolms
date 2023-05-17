@@ -7,12 +7,14 @@ use App\Models\Attendance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
+
 class AttendanceController extends Controller
 {
 
+
     public function index()
     {
-        $data = Attendance::select('attendance_date')->groupBy('attendance_date')->get();
+        $data = Attendance::select('attendance_date')->groupBy('attendance_date')->orderBy('attendance_date', 'DESC')->get();
         return Response::json($data);
     }
 
@@ -22,15 +24,24 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        for ($i = 0; $i < count($request->form); $i++){
-            Attendance::create([
-                'employee_id' => $request->form[$i]['employee_id'],
-                'attendance_status' => $request->form[$i]['attendance_status'],
-                'attendance_date' => date('Y-m-d', strtotime($request->form[$i]['attendance_date'])),
-            ]);
+
+        $check = Attendance::where('attendance_date', date('Y-m-d', strtotime($request->form[0]['attendance_date'])))->first();
+
+
+        if (!$check){
+            for ($i = 0; $i < count($request->form); $i++){
+                Attendance::create([
+                    'employee_id' => $request->form[$i]['employee_id'],
+                    'attendance_status' => $request->form[$i]['attendance_status'],
+                    'attendance_date' => date('Y-m-d', strtotime($request->form[$i]['attendance_date'])),
+                ]);
+            }
+
+            return Response::json('Attendance store successfully!');
+        }else{
+            return Response::json('Already Attendance stored!');
         }
 
-        return Response::json('Attendance store successfully!');
 
     }
 
@@ -39,7 +50,8 @@ class AttendanceController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Attendance::with('employee')->where('attendance_date', $id)->get();
+        return Response::json($data);
     }
 
 
@@ -49,7 +61,20 @@ class AttendanceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        Attendance::where('attendance_date', $id)->delete();
+
+            for ($i = 0; $i < count($request->form); $i++){
+                Attendance::create([
+                    'employee_id' => $request->form[$i]['employee_id'],
+                    'attendance_status' => $request->form[$i]['attendance_status'],
+                    'attendance_date' => date('Y-m-d', strtotime($request->form[$i]['attendance_date'])),
+                ]);
+            }
+
+
+
+        return Response::json('Attendance updated successfully!');
     }
 
     /**
@@ -57,6 +82,6 @@ class AttendanceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $delete = Attendance::where('attendance_date', $id)->delete();
     }
 }

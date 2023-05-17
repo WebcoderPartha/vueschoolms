@@ -160,9 +160,7 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           axios.delete('/attendance/'+id).then(res => {
-            return this.attendances = this.attendances.filter(attendance => {
-              return attendance.id !== id
-            })
+            this.getAttendance();
           })
           Swal.fire(
               'Deleted!',

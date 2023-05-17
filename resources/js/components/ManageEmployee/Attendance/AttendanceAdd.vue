@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Attendance List</h1>
+            <h1 class="m-0">Attendance Add</h1>
           </div><!-- /.col -->
 
 
@@ -116,6 +116,8 @@ export default {
     this.authenticate();
     this.pageTitle();
     this.getEmployee();
+    this.currentDate();
+
   },
   data(){
     return {
@@ -128,10 +130,10 @@ export default {
   },
   methods:{
 
-    // currentDate(){
-    //   let date = document.getElementById('ok');
-    //   date.value = new Date().getUTCFullYear()
-    // },
+    currentDate(){
+      let getDate = new Date()
+      this.attendance_date = moment(getDate).format('YYYY-MM-D')
+    },
 
     AttendantEvent(e){
       if (!this.validateDate()){
@@ -155,11 +157,11 @@ export default {
         }
 
         axios.post('/attendance',data).then(response => {
-
+        if (response.status === 200){
           this.$refs.cleardata.reset()
           this.$router.push({name: 'attendance'})
           Notification.success(response.data)
-
+        }
         }).catch(error => {
 
         })
