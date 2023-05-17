@@ -84,4 +84,14 @@ class AttendanceController extends Controller
     {
         $delete = Attendance::where('attendance_date', $id)->delete();
     }
+
+    public function deleteAll(Request $request){
+
+        for ($i = 0; $i < count($request->selected); $i++){
+            Attendance::where('attendance_date', $request->selected[$i])->delete();
+
+        }
+
+        return Response::json('Attendance deleted successfully!');
+    }
 }

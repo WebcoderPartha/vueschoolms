@@ -57,6 +57,7 @@
                 </table>
                 <h3 class="text-center" v-show="!attendances.length > 0">No data found!</h3>
               </div>
+
               <!-- /.card-body -->
               <div class="card-footer clearfix">
                 <ul class="pagination pagination-sm m-0 float-right">
@@ -108,12 +109,12 @@ export default {
 
         if (value){
 
-          this.attendances.forEach(group => {
-            array.push(group.id)
+          this.attendances.forEach(attendant => {
+            array.push(attendant.id)
           })
 
         }
-        this.selected = selected;
+        this.selected = array;
 
       }
     }
@@ -134,7 +135,7 @@ export default {
           let data = {
             selected: this.selected
           }
-          axios.post('/attendance', data).then(res => {
+          axios.post('/attendance/delall', data).then(res => {
             this.getAttendance();
             this.selected = []
           })
